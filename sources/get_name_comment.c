@@ -12,18 +12,40 @@
 
 #include "asm.h"
 
-static char get_name(int fd, char *str)
+static char extract_from_quots(int fd, char **quot)
 {
-	1. проверить название команды. если не имя, то нахуй это ошибка
-	2. проверить лишние символы до скобок
 	3. конкотинировать строку до закрывающихся скобок
-	4. если конец файла, а скобок нет, то нахуй это ошибка
-	
+	4. если конец файла, а скобок нет, то нахуй это ошибка	
 }
 
-static char get_comment(int fd, char *str)
+static char get_nc_qouots(int fd, char **str)
 {
-	
+	int		i;
+	int		end_quot;
+	int		start_quot;
+	char 	*quot;
+
+	end_quot = 0;
+	if (!(is_name(*str) && i = ft_strlen(NAME_CMD_STRING)) && 
+		!(is_comment(*str) && i = ft_strlen(COMMENT_CMD_STRING)))
+			error ("garbage");
+	while (is_whitespase((*str)[i]))
+		i++;
+	if ((start_quot = 0) && (*str)[i] == '"')
+	{
+		start_quot = i + 1;
+		while ((end_quot = ++i) && (*str)[i] != '\0')
+			if ((*str)[i] == '"')
+			{
+				while (is_whitespase((*str)[++i]));
+				if ((*str)[i] != '\0')
+					error();
+			}
+	}
+	quot = start_quot ? ft_strsub(*str, start_quot, end_quot - start_quot) :
+			error();
+	ft_strdel(*str);
+	return (end_quot ? quot : extract_from_quots(fd, &quot));
 }
 
 static void	make_binary_nc(t_header **header, char *name, char *comment)
@@ -65,35 +87,13 @@ void		get_name_comment(int fd, t_header **header)
 			continue ;
 		}
 		if (line[i] == NAME_CMD_STRING[0] && line[i + 1] == NAME_CMD_STRING[0])
-			name = get_name(fd, line);
-		else if (line[i] == COMMENT_CMD_STRING[0] && line[i + 1] == COMMENT_CMD_STRING[1])
-			comment = get_comment(fd, line);
+			name = get_nc_qouots(fd, &line);
+		else if (line[i] == COMMENT_CMD_STRING[0] &&
+				line[i + 1] == COMMENT_CMD_STRING[1])
+			comment = get_nc_qouots(fd, &line);
 		ft_strdel(line);
 		if ((name && comment) || (!name && !comment))
 			break ;
 	}
-	make_binary_nc(&header, name, comment);
+	make_binary_nc(&header, name, comment); // проверить на наличие имени и коммента 
 }
-
-// char		*get_nc(int fd, t_header *header) //можно найти сразу и имя и коммент, но если флаг - нейм, то вернуть имя, а коммент сохранить в статику
-// {
-// 	char		*comment;
-// 	char		*name;
-// 	char		temp;
-// 	int			j;
-
-// 	comment = NULL;
-// 	name = NULL;
-// 	j = -1;
-// 	check_nc(file);//на повторы, мусор, отсутствие какой-то команды, расположение внутри кода
-// 	while (!is_lable(file[++j]) || !is_instruction(file[j]))
-// 	{
-// 		if (is_name(file[j]))
-// 			name = extract_quots(file, &j);
-// 		if (is_comment(file[j]))
-// 			comment = extract_quots(file, &j);
-// 	}
-// 	get_binary_nc(&header->comment, comment, COMMENT_LENGTH + 1);
-// 	get_binary_nc(&header->name, name, PROG_NAME_LENGTH + 1);
-// }
-

@@ -44,6 +44,10 @@ int		main(int ac, char **av)
 
 toDo
 
+- char get_name(int fd, char *str)
+- char get_comment(int fd, char *str)
+- make_binary_nc(&header, name, comment)
+
 - дописать функции обработки ошибок
 - протестить сохранение имени в бинарник
 - фикс
