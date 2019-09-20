@@ -13,11 +13,11 @@
 NAME = asm
 
 DIR = ./sources/
-HEADER = includes/asm.h includes/op.h #includes/libft.h
+HEADER = ./includes/asm.h ./includes/op.h #includes/libft.h
 LIB = $(DIR)libft.a
 
-SOURCES = $(DIR)main.c $(DIR)validation.c $(DIR)get_name_comment.c\
-		$(DIR)make_binary.c $(DIR)definition.c $(DIR)op.c\
+SOURCES = $(DIR)main.c $(DIR)get_name_comment.c\
+		$(DIR)inits.c $(DIR)definition.c $(DIR)op.c\
 
 OBJ = $(SOURCES:%.c=%.o)
 
@@ -26,8 +26,8 @@ FLAGS = #-Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(DIR)gcc $(FLAGS) -c $(SOURCES) -I $(HEADER)
-	$(DIR)gcc $(OBJ) $(LIB) -o $@
+	gcc $(FLAGS) -c $(SOURCES) -I $(HEADER)
+	gcc $(OBJ) $(LIB) -o $@
 clean:
 	rm -f $(OBJ)
 

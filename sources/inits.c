@@ -10,51 +10,51 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 t_header		*init_header(void)
 {
 	t_header	*header;
 
 	header = (t_header*)ft_memalloc(sizeof(t_header));
-	header->magic = get_magic(COREWAR_EXEC_MAGIC);
+	header->magic = 5;//get_magic(COREWAR_EXEC_MAGIC);
 	header->prog_size = 0;
 	return(header);
 }
 
-t_arg_lbl		*init_arg_lable(void)
-{
-	t_arg_lbl	*arg_lbl;
+// t_arg_lbl		*init_arg_lable(void)
+// {
+// 	t_arg_lbl	*arg_lbl;
 
-	arg_lbl = (t_lable*)ft_memalloc(sizeof(t_lable))
-	arg_lbl->size = 0;
-	arg_lbl->bytes_in_code = 0;
-	arg_lbl->name_lbl = NULL;
-	arg_lbl->in_code = NULL;
-	arg_lbl->type = NULL;
-	arg_lbl->lables = NULL;
-	arg_lbl->nexst = NULL;
-	return (arg_lbl);
-}
+// 	arg_lbl = (t_lable*)ft_memalloc(sizeof(t_lable))
+// 	arg_lbl->size = 0;
+// 	arg_lbl->bytes_in_code = 0;
+// 	arg_lbl->name_lbl = NULL;
+// 	arg_lbl->in_code = NULL;
+// 	arg_lbl->type = NULL;
+// 	arg_lbl->lables = NULL;
+// 	arg_lbl->nexst = NULL;
+// 	return (arg_lbl);
+// }
 
-t_lable		*init_lables(void)
-{
-	t_lable	*lables;
+// t_lable		*init_lables(void)
+// {
+// 	t_lable	*lables;
 
-	lables = (t_lable*)ft_memalloc(sizeof(t_lable))
-	lables->dir = 0;
-	lables->indir = 0;
-	lables->in_arg = NULL;
-	lables->next = NULL;
-	return (lables);
-}
+// 	lables = (t_lable*)ft_memalloc(sizeof(t_lable))
+// 	lables->dir = 0;
+// 	lables->indir = 0;
+// 	lables->in_arg = NULL;
+// 	lables->next = NULL;
+// 	return (lables);
+// }
 
-t_holder	*init_holder(int fd_arg)
+t_holder	*init_holder(void)
 {
 	t_holder	*holder;
 
 	holder = (t_holder*)ft_memalloc(sizeof(t_holder));
-	holder->header = init_header(holder->file);
+	holder->header = init_header();
 	holder->arg_lbl = NULL;
 	holder->lables = NULL;
 	holder->binary = NULL;

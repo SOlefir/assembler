@@ -10,29 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
-int g_str_n = 0;
-int g_byte_n = 0;
+int 	g_str_n = 0;
+int 	g_byte_n = 0;
 
 int		main(int ac, char **av)
 {
 	t_holder	*holder;
-	char		*prog_name;
+	// char		*prog_name;
 	int			fd_arg;
 
 	if (ac != 2)
 		//error_manage();
 		ft_printf("arg_error\n");
-	if ((fd_arg = open(av[1], O_RDONLY)) < 0)
+	if ((fd_arg = open(av[1], O_RDONLY)) < 0) // проверка .s
 		ft_printf("read_error\n");
-	holder = init_holder(void);
+	holder = init_holder();
 	get_name_comment(fd_arg, &holder->header);
-	get_all_code(fd_arg, &holder);// валидировать + записывать в структуру сразу байт код, и метки. (сохранить место метки - поинтер, на ее место написать нули)
-	insert_lables(&holder); // мб засунуть в пред. функцию
-	close(fd_arg);
-	prog_name = make_name(av[1]);
-	write_in_file(prog_name, holder);
+	// get_all_code(fd_arg, &holder);// валидировать + записывать в структуру сразу байт код, и метки. (сохранить место метки - поинтер, на ее место написать нули)
+	// insert_lables(&holder); // мб засунуть в пред. функцию
+	// close(fd_arg);
+	// prog_name = make_name(av[1]);
+	// write_in_file(prog_name, holder);
 	return (0);
 }
 /*

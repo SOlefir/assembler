@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../includes/asm.h"
 
 _Bool	is_lable(char *str)
 {
@@ -29,26 +29,26 @@ _Bool	is_lable(char *str)
 	return (0);
 }
 
-_Bool	is_instruction(char *str)
-{
-	int i;
+// _Bool	is_instruction(char *str)
+// {
+// 	int i;
 
-	i = -1;
-	while (++i < 17) 
-		if (ft_strcmp(g_op_tab[i++]->name_op, str) != 0)
-			return (1);
-	return (0);
-}
+// 	i = -1;
+// 	while (++i < 17) 
+// 		if (ft_strcmp(g_op_tab[i].name_op, str) != 0)
+// 			return (1);
+// 	return (0);
+// }
 
 _Bool	is_name(char *str)
 {
 	int 	i;
-	char	*command;
+	int		len_cmd;
 
-	command = NAME_CMD_STRING;
-	i = ft_strlen(command);
-	while (--i >= 0)
-		if (str[i] != command[i])
+	i = 0;
+	len_cmd = ft_strlen(NAME_CMD_STRING);
+	while (++i <= len_cmd)
+		if (str[i] != NAME_CMD_STRING[i])
 			return (0);
 	return (1);
 }
@@ -56,12 +56,12 @@ _Bool	is_name(char *str)
 _Bool	is_comment(char *str)
 {
 	int 	i;
-	char	*command;
+	int		len_cmd;
 
-	command = COMMENT_CMD_STRING;
-	i = ft_strlen(command);
-	while (--i >= 0)
-		if (str[i] != command[i])
+	i = 0;
+	len_cmd = ft_strlen(COMMENT_CMD_STRING);
+	while (++i <= len_cmd)
+		if (str[i] != COMMENT_CMD_STRING[i])
 			return (0);
 	return (1);
 }
