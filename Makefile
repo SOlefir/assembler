@@ -18,6 +18,7 @@ LIB = $(DIR)libft.a
 
 SOURCES = $(DIR)main.c $(DIR)get_name_comment.c\
 		$(DIR)inits.c $(DIR)definition.c $(DIR)op.c\
+		$(DIR)get_name_comment $(DIR)errors.\
 
 OBJ = $(SOURCES:%.c=%.o)
 

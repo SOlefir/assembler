@@ -12,88 +12,47 @@
 
 #include "../includes/asm.h"
 
-static char *extract_from_quots(int fd, char **quot)
-{
-
-	int 	i;
-	int 	end_quot;
-	char 	*line;
-	char 	*temp;
-
-	i = -1;
-	line = NULL;
-	end_quot = 0;
-	while (!end_quot && get_next_line(fd, &line) > 0)
-	{
-		while ((*quot)[++i] != '\0')
-			if ((*quot)[i] == '"' && (end_quot++))
-				break ;
-		if (end_quot)
-		{	
-			while (ft_iswhitespace((*quot)[++i]));
-			if ((*quot)[i] != '\0')
-					ft_printf("error quot\n");
-		}
-		temp = ft_strncat(line, *quot, i);
-		ft_strdel(&line);
-		ft_strdel(quot);
-	}
-	return (temp);
-}
-
-static char *get_nc_qouots(int fd, char **str)
+static char *get_binary_nc(int fd, char **str, int size_cmd)
 {
 	int		i;
-	int		end_quot;
-	int		start_quot;
 	char 	*quot;
+	char	*end_quot;
 
 	end_quot = 0;
-	ft_printf("HERE\n");
-	if (!(is_name(*str) && (i = ft_strlen(NAME_CMD_STRING))) && 
-		!(is_comment(*str) && (i = ft_strlen(COMMENT_CMD_STRING))))
-			ft_printf ("garbage\n");
+	i = size_cmd;
 	while (ft_iswhitespace((*str)[i]))
 		i++;
-	if ((start_quot = 0) && (*str)[i] == '"')
-	{
-		start_quot = i + 1;
-		while ((end_quot = ++i) && (*str)[i] != '\0')
-			if ((*str)[i] == '"')
-			{
-				while (ft_iswhitespace((*str)[++i]));
-				if ((*str)[i] != '\0')
-					ft_printf("end_quot\n");
-			}
-	}
-	if (!(quot = ft_strsub(*str, start_quot, end_quot - start_quot)))
-		ft_printf("error quot\n");
-	ft_strdel(str);
-	return (end_quot ? quot : extract_from_quots(fd, &quot));
+	if ((*str)[i] == '"')
+		quot = extract_from_quots(fd, '"', &str[i]);
+	else
+		error_exit("Have`n quotes");
+	end_quot = ft_strchr(str, '"');
+	skip_whitespaces(&end_quot);
+	if (*end_quot != '\0' || *end_quot != COMMENT_CHAR)
+		error_exit("garbadge after quotes");
+	ft_strdel(&str);
+	return (quote);
 }
 
-// static void	make_binary_nc(t_header **header, char *name, char *comment)
-// {
-// 	char	*binary;
-// 	int 	i;
+static void	save_in_heder(t_header **header, char *name, char *comment)
+ {
+ 	int 	i;
 
-// 	i = 0;
-// 	binary = make_binary(name);
-// 	while (++i <= PROG_NAME_LENGTH + 1)
-// 		if (binary[i])
-// 			header->prog_name[i] = binary[i];
-// 		else
-// 			header->prog_name[i] = 0;
-// 	i = 0;
-// 	ft_strdel(&binary);
-// 	binary = make_binary(comment);
-// 	while (++i <= COMMENT_LENGTH + 1)
-// 		if (binary[i])
-// 			header->comment[i] = binary[i];
-// 		else
-// 			header->comment[i] = 0;
-// 	ft_strdel(&binary);
-// }
+ 	i = 0;
+ 	if (!name || !comment)
+ 		error_exit(ft_strjoin("Have`n ", name ? "comment." : "name."));
+ 	while (++i <= PROG_NAME_LENGTH + 1)
+ 		if (name[i])
+ 			header->prog_name[i] = name[i];
+ 		else
+ 			header->prog_name[i] = 0;
+ 	i = 0;
+ 	while (++i <= COMMENT_LENGTH + 1)
+ 		if (comment[i])
+ 			header->comment[i] = comment[i];
+ 		else
+ 			header->comment[i] = 0;
+}
 
 void		get_name_comment(int fd, t_header **header)
 {
@@ -103,27 +62,22 @@ void		get_name_comment(int fd, t_header **header)
 	char 	*comment;
 
 	line = NULL;
-	while (get_next_line(fd, &line) > 0)
+	comment = NULL;
+	name = NULL;
+	while (get_next_line(fd, &line) >= 0 && (i = skeep_iswhitespace(line)))
 	{
 		g_str_n++;
-		i = 0;
-		while (ft_iswhitespace(line[i]))
-			i++;
-		if (line[i] == COMMENT_CHAR)
-		{
-			ft_strdel(&line);	
+		if (is_unnessery(&line, i))
 			continue ;
-		}
-		if (line[i] == NAME_CMD_STRING[0])// && line[i + 1] == NAME_CMD_STRING[1])
-			name = get_nc_qouots(fd, &line);
-		else if (line[i] == COMMENT_CMD_STRING[0]) //&&
-				//line[i + 1] == COMMENT_CMD_STRING[1])
-			comment = get_nc_qouots(fd, &line);
+		if (is_name(line))
+			name = get_nc(fd, &line, ft_strlen(NAME_CMD_STRING));
+		else if (is_comment(line))
+			comment = get_nc(fd, &line, ft_strlen(COMMENT_CMD_STRING));
 		ft_strdel(&line);
 		if ((name && comment) || (!name && !comment))
 			break ;
 	}
-	ft_printf("name: %s\n", name);
-	ft_printf("comment: %s\n", comment);
-	//make_binary_nc(&header, name, comment); // проверить на наличие имени и коммента 
+	save_in_heder(&header, name, comment);
+	ft_strdel(&name);
+ 	ft_strdel(&comment);
 }

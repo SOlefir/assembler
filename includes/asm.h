@@ -96,11 +96,15 @@ _Bool			is_instruction(char *str);
 _Bool			is_name(char *str);
 _Bool			is_comment(char *str);
 
+char			*extract_from_quotes(int fd, char quote, char **str);
+
 void			get_name_comment(int fd, t_header **header);
 void			make_binary_code(t_holder **holder);
 char			*make_name(char	*file_name);
 void			insert_lables(t_holder **holder);
 
+void			error_exit(char *massage, int byte);
+char			*extract_from_quotes(int fd, char quote, char **str);
 // void			check_nc(char *str, char f);
 // t_header		*save_nc(int fd);
 // char			**make_binary(char **line);
