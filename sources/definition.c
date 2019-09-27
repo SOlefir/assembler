@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/17 18:42:50 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/27 22:09:36 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,24 @@ _Bool	is_lable(char *str)
 // 	return (0);
 // }
 
+_Bool		is_unnecessary(char **line, int i)
+{
+	if ((*line)[i] == '\0' || (*line)[i] == COMMENT_CHAR)
+	{
+		ft_strdel(line);
+		return (1);
+	}
+	return (0);
+}
+
 _Bool	is_name(char *str)
 {
 	int 	i;
 	int		len_cmd;
 
 	i = 0;
-	len_cmd = ft_strlen(NAME_CMD_STRING);
-	while (++i <= len_cmd)
+	i = ft_strlen(NAME_CMD_STRING);
+	while (--i)
 		if (str[i] != NAME_CMD_STRING[i])
 			return (0);
 	return (1);

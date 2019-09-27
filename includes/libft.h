@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 21:06:38 by dquitzon          #+#    #+#             */
-/*   Updated: 2019/08/08 19:12:04 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/27 21:43:53 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 # include "ft_printf.h"
 

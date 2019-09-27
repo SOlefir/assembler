@@ -6,16 +6,15 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/18 13:44:13 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/27 21:44:08 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H 
 
-#include "./op.h"
+#include "op.h"
 #include "libft.h"
-#include <fcntl.h>
 /*
 **		TYPEDEF
 */
@@ -96,11 +95,18 @@ _Bool			is_instruction(char *str);
 _Bool			is_name(char *str);
 _Bool			is_comment(char *str);
 
+char			*extract_from_quotes(int fd, char quote, char **str);
+
 void			get_name_comment(int fd, t_header **header);
 void			make_binary_code(t_holder **holder);
 char			*make_name(char	*file_name);
 void			insert_lables(t_holder **holder);
 
+void			error_exit(char *massage, int byte);
+char			*extract_from_quots(int fd, char quote, char **str);
+
+_Bool			is_unnecessary(char **line, int i);
+int				skip_whitespaces(char *str);
 // void			check_nc(char *str, char f);
 // t_header		*save_nc(int fd);
 // char			**make_binary(char **line);

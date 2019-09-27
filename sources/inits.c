@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/17 20:08:25 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/27 20:10:43 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_header		*init_header(void)
 	t_header	*header;
 
 	header = (t_header*)ft_memalloc(sizeof(t_header));
-	header->magic = 5;//get_magic(COREWAR_EXEC_MAGIC);
+	header->magic = COREWAR_EXEC_MAGIC;
 	header->prog_size = 0;
 	return(header);
 }

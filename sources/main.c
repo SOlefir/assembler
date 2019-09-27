@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 15:26:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/17 20:09:48 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/27 21:41:01 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,18 @@ int 	g_byte_n = 0;
 int		main(int ac, char **av)
 {
 	t_holder	*holder;
-	// char		*prog_name;
 	int			fd_arg;
 
 	if (ac != 2)
-		//error_manage();
-		ft_printf("arg_error\n");
+		error_exit("arg_error", 0);
 	if ((fd_arg = open(av[1], O_RDONLY)) < 0) // проверка .s
-		ft_printf("read_error\n");
+		error_exit("read_error", 0);
 	holder = init_holder();
 	get_name_comment(fd_arg, &holder->header);
-	// get_all_code(fd_arg, &holder);// валидировать + записывать в структуру сразу байт код, и метки. (сохранить место метки - поинтер, на ее место написать нули)
+	//get_instruction(fd_arg, &holder);// валидировать + записывать в структуру сразу байт код, и метки. (сохранить место метки - поинтер, на ее место написать нули)
 	// insert_lables(&holder); // мб засунуть в пред. функцию
-	// close(fd_arg);
-	// prog_name = make_name(av[1]);
-	// write_in_file(prog_name, holder);
+	close(fd_arg);
+	// write_in_file(make_name(av[1]), holder);
 	return (0);
 }
 /*

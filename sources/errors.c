@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_arg.c                                        :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/14 17:26:03 by solefir           #+#    #+#             */
-/*   Updated: 2019/08/08 19:25:26 by solefir          ###   ########.fr       */
+/*   Created: 2019/09/27 20:00:32 by solefir           #+#    #+#             */
+/*   Updated: 2019/09/27 20:03:50 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/asm.h"
 
-void		parse_arg(t_printf *global)
+void	error_exit(char *massage, int byte)
 {
-	t_flags flags;
+	int i;
 
-	ft_bzero(&flags, sizeof(t_flags));
-	find_flags(global, &flags);
-	specifier(global, &flags);
+	i = 0;
+	ft_putstr_fd("ERROR: \n     str ", 2);
+	ft_putnbr_fd(g_str_n, 2);
+	ft_putstr_fd("col ", 2);
+	ft_putnbr_fd(byte, 2);
+	ft_putchar_fd('\n', 2);
+	ft_putstr_fd(massage, 2);
+	exit(2);
 }
