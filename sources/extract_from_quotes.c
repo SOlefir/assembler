@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/28 14:02:20 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/28 20:13:58 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char				*collapse_list(t_list **head, size_t n)
 		if (next)
 		{
 			ft_strcat(ret, "\n");
-			ft_strdel(now->content);
+			ft_strdel((char**)&(now->content));
 		}
 		free(now);
 		now = next;

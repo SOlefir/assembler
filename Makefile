@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 21:25:16 by dquitzon          #+#    #+#              #
-#    Updated: 2019/09/28 14:27:52 by solefir          ###   ########.fr        #
+#    Updated: 2019/09/28 16:45:21 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SOURCES	:=	$(addprefix $(DIR), $(SOURCES))
 
 OBJ		:=	$(SOURCES:%.c=%.o)
 
-CFLAGS	:=	$(addprefix -W, all extra) \
+CFLAGS	:=	$(addprefix -W, all extra error) \
 			$(addprefix -I, $(HEADER))
 
 all: $(NAME)

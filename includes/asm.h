@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/28 15:26:12 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/28 16:43:25 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ t_arg_lbl		*init_arg_lable(void);
 
 _Bool			is_lable(char *str);
 _Bool			is_instruction(char *str);
-_Bool			is_name(char *str);
-_Bool			is_comment(char *str);
+_Bool			is_(char *cmd, char *str);
 
 char			*extract_from_quotes(int fd, char quote, char **str);
 

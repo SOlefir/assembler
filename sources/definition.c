@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/27 22:09:36 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/28 16:47:47 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,15 @@ _Bool		is_unnecessary(char **line, int i)
 	return (0);
 }
 
-_Bool	is_name(char *str)
+_Bool	is_(char *cmd, char *str)
 {
 	int 	i;
-	int		len_cmd;
 
 	i = 0;
-	i = ft_strlen(NAME_CMD_STRING);
+	i = ft_strlen(cmd);
 	while (--i)
-		if (str[i] != NAME_CMD_STRING[i])
+		if (str[i] != cmd[i])
 			return (0);
 	return (1);
 }
 
-_Bool	is_comment(char *str)
-{
-	int 	i;
-	int		len_cmd;
-
-	i = 0;
-	len_cmd = ft_strlen(COMMENT_CMD_STRING);
-	while (++i <= len_cmd)
-		if (str[i] != COMMENT_CMD_STRING[i])
-			return (0);
-	return (1);
-}
