@@ -6,35 +6,47 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 21:25:16 by dquitzon          #+#    #+#              #
-#    Updated: 2019/09/27 21:49:43 by solefir          ###   ########.fr        #
+#    Updated: 2019/09/28 14:27:52 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = asm
 
+CC = gcc
+
 DIR = ./sources/
 HEADER = ./includes/asm.h ./includes/op.h #./includes/libft.h
-LIB = ./libft.a
+LIB		:=	./libft.a
 
-SOURCES = $(DIR)main.c $(DIR)get_name_comment.c $(DIR)op.c\
-		$(DIR)inits.c $(DIR)definition.c $(DIR)errors.c\
-		$(DIR)extract_from_quotes.c $(DIR)skip_whitespace.c\
+SOURCES	:=	main.c \
+			get_name_comment.c \
+			op.c \
+			inits.c \
+			definition.c \
+			errors.c \
+			extract_from_quotes.c \
+			skip_whitespace.c
 
-OBJ = $(SOURCES:%.c=%.o)
+SOURCES	:=	$(addprefix $(DIR), $(SOURCES))
 
-FLAGS = #-Wall -Wextra -Werror
+OBJ		:=	$(SOURCES:%.c=%.o)
+
+CFLAGS	:=	$(addprefix -W, all extra) \
+			$(addprefix -I, $(HEADER))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc $(FLAGS) -c $(SOURCES) -I $(HEADER)
-	gcc $(OBJ) $(LIB) -o $@
+	${MAKE} -C ./libft/ all
+	$(CC) $(OBJ) $(LIB) -o $@
 
 clean:
+	${MAKE} -C ./libft/ $@
 	rm -f $(OBJ)
-	rm -f *.o
 
 fclean: clean
+	${MAKE} -C ./libft/ $@
 	rm -f $(NAME)
 
 re: fclean all
+	${MAKE} -C ./libft/ $@

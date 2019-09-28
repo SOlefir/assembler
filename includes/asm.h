@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/27 21:44:08 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/28 15:26:12 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ extern int		g_str_n;
 extern int		g_byte_n;
 
 /*
-**		SRTUCTURES
+**		STRUCTURES
 */
 
 struct			s_lable
@@ -103,10 +103,10 @@ char			*make_name(char	*file_name);
 void			insert_lables(t_holder **holder);
 
 void			error_exit(char *massage, int byte);
-char			*extract_from_quots(int fd, char quote, char **str);
 
 _Bool			is_unnecessary(char **line, int i);
 int				skip_whitespaces(char *str);
+
 // void			check_nc(char *str, char f);
 // t_header		*save_nc(int fd);
 // char			**make_binary(char **line);

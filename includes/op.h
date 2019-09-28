@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 17:28:47 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/15 17:23:41 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/28 15:04:23 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 # define COMMENT_CHAR			'#'
+# define ALT_COMMENT_CHAR		';'
 # define LABEL_CHAR				':'
 # define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','

@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/27 21:57:48 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/28 15:21:14 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	save_in_heder(t_header **header, char *name, char *comment)
  	i = 0;
  	ft_printf("%s\n$s\n", name, comment);
  	if (!name || !comment)
- 		error_exit(ft_strjoin("Have`n ", name ? "comment." : "name."), 0);
+ 		error_exit(ft_strjoin("There is no ", name ? "comment." : "name."), 0);
  	while (++i <= PROG_NAME_LENGTH + 1)
  		if (name[i])
  			(*header)->prog_name[i] = name[i];
