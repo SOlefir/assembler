@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 21:25:16 by dquitzon          #+#    #+#              #
-#    Updated: 2019/09/28 16:45:21 by solefir          ###   ########.fr        #
+#    Updated: 2019/09/28 21:37:09 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,13 +32,14 @@ SOURCES	:=	$(addprefix $(DIR), $(SOURCES))
 OBJ		:=	$(SOURCES:%.c=%.o)
 
 CFLAGS	:=	$(addprefix -W, all extra error) \
-			$(addprefix -I, $(HEADER))
+			$(addprefix -I, $(HEADER))\
+			#-fsanitize="address" -g -fno-omit-frame-pointer
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	${MAKE} -C ./libft/ all
-	$(CC) $(OBJ) $(LIB) -o $@
+	$(CC) $(OBJ) $(LIB) $(CFLAGS) -o $@
 
 clean:
 	${MAKE} -C ./libft/ $@

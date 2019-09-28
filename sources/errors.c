@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 20:00:32 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/28 16:51:39 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/28 21:42:20 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	error_exit(char *massage, int byte)
 	ft_putnbr_fd(byte, 2);
 	ft_putchar_fd('\n', 2);
 	ft_putstr_fd(massage, 2);
+	//system("leaks asm");
 	exit(2);
 }

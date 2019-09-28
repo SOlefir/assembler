@@ -1,6 +1,6 @@
-.name   "The spiderman"  dfs
-.comment "With great power comes
- great responsibility"
+  .name   "The spiderman"
+  #ghjk
+.comment "With great power comes great responsibility"
 	    ld  %4, r4
 	    sti r1, %:say_live, %1
 	    sti r1, %:loop_live, %1
