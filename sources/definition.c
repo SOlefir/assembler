@@ -6,41 +6,34 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 16:49:40 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 20:11:36 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-_Bool	is_lable(char *str)
+static _Bool	is_lblchar(char c)
+{
+	return (((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')
+		|| c == '_') ? 1 : 0);
+}
+
+int			is_lable(char *str)
 {
 	int i;
 
 	i = -1;
 	while (str[++i] != '\0')
 	{
-		while (!ft_iswhitespace(str[i]))
+		while (is_lblchar(str[i]))
 			i++;
-		while (ft_isalpha((int)str[i]))
-			i++;
-		if (str[i] == ':')
-			return (1);
+		if (str[i++] == 'LABEL_CHAR' && i += skip_whitespaces(&str[i]) >= 0)
+			return (i);
 	}
 	return (0);
 }
 
-// _Bool	is_instruction(char *str)
-// {
-// 	int i;
-
-// 	i = -1;
-// 	while (++i < 17)
-// 		if (ft_strcmp(g_op_tab[i].name_op, str) != 0)
-// 			return (1);
-// 	return (0);
-// }
-
-_Bool	is_unnecessary(char **line, int i)
+_Bool			is_unnecessary(char **line, int i)
 {
 	if ((*line)[i] == '\0' || (*line)[i] == COMMENT_CHAR)
 	{
@@ -50,7 +43,7 @@ _Bool	is_unnecessary(char **line, int i)
 	return (0);
 }
 
-_Bool	is_(char *cmd, char *str)
+_Bool			is_(char *cmd, char *str)
 {
 	int	i;
 

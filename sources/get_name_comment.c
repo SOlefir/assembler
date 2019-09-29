@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 16:49:17 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 16:56:05 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void			get_name_comment(int fd, t_header **header)
 	comment = NULL;
 	name = NULL;
 	ft_printf("\n_____________\n");
-	while (get_next_line(fd, &line) >= 0 && (i = skip_whitespaces(line)) >= 0)
+	while (get_next_line(fd, &line) && (i = skip_whitespaces(line)) >= 0)
 	{
 		g_str_n++;
 		if (is_unnecessary(&line, i))

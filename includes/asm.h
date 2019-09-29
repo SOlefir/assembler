@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 16:48:27 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 20:28:59 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ extern int		g_byte_n;
 
 struct			s_lable
 {
-	int 			dir;
-	int 			indir;
+	char 			*name;
+	int 			value;
 	t_arg_lbl	 	*in_arg;
 	t_lable			*next;
 };

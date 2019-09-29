@@ -1,4 +1,4 @@
-  .name   "The spiderman"
+	.name   "The spiderman"
   #ghjk
 .comment "With great power comes great responsibility"
 	    ld  %4, r4

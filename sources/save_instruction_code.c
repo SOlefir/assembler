@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skip_whitespace.c                                  :+:      :+:    :+:   */
+/*   save_instruction_code.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/27 13:37:52 by mtrotsen          #+#    #+#             */
-/*   Updated: 2019/09/29 17:24:45 by solefir          ###   ########.fr       */
+/*   Created: 2019/09/29 20:18:01 by solefir           #+#    #+#             */
+/*   Updated: 2019/09/29 20:30:57 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int		skip_whitespaces(char *str)
+void	save_instruction_code(char *instruct, t_holder **holder, char *lable)
 {
-	int		i;
 
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	return (i);
+	if (lable != NULL)
+		holder->lables = init_lables(lable);
+
+	1. если есть метка, то сохранить ее.
+	2. 
 }

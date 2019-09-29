@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skip_whitespace.c                                  :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/27 13:37:52 by mtrotsen          #+#    #+#             */
-/*   Updated: 2019/09/29 17:24:45 by solefir          ###   ########.fr       */
+/*   Created: 2019/09/29 19:41:30 by solefir           #+#    #+#             */
+/*   Updated: 2019/09/29 20:13:32 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include "./libft.h"
 
-int		skip_whitespaces(char *str)
+char	*ft_strdup(const char *str, uint n)
 {
-	int		i;
+	size_t	i;
+	char	*dup;
 
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	return (i);
+	if (!dup = malloc(sizeof(char) * n + 1))
+		return (NULL);
+	dup[n] = '\0'
+	while (--n >= 0)
+		dup[n] = str[n];
+	return (dup);
 }

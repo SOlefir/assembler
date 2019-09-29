@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 21:25:16 by dquitzon          #+#    #+#              #
-#    Updated: 2019/09/28 21:37:07 by solefir          ###   ########.fr        #
+#    Updated: 2019/09/29 19:47:03 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SOURCES = ./ft_bzero.c ./ft_memdel.c ./ft_strclr.c\
     ./ft_strlen.c ./ft_lstnew.c ./ft_lstmap.c\
     ./ft_lstdelone.c ./ft_lstdel.c ./ft_lstadd.c\
     ./ft_lstiter.c ./ft_masmemdel.c ./ft_lstdelcontent.c\
-	./ft_iswhitespace.c ./get_next_line.c\
+	./ft_iswhitespace.c ./get_next_line.c ./ft_strndup.c\
     \
     ./ft_printf.c ./parse_arg.c\
     ./print_buf.c ./flags.c\

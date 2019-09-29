@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 16:30:36 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 16:56:06 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char				*extract_from_quotes(int fd, char quote, char **str)
 	t_list	*head;
 	char	*end;
 
-	head = NULL;
 	head = ft_lstnewsimple(*str);
 	while (!(end = ft_strchr(*str, quote)) && get_next_line(fd, str) > 0)
 	{
