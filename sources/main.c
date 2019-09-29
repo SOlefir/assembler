@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 15:26:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 19:25:56 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 23:38:32 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int				main(int ac, char **av)
 	holder = init_holder();
 	get_name_comment(fd_arg, &holder->header);
 	get_instruction(fd_arg, &holder);
-	// insert_lables(&holder);
-	// close(fd_arg);
+	//insert_label(&holder);
+	close(fd_arg);
 	// write_in_file(make_name(av[1]), holder);
 	//system("leaks asm");
 	return (0);

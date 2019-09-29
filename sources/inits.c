@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 22:14:25 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 23:14:07 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,23 @@ t_header		*init_header(void)
 // 	t_arg_lbl	*arg_lbl;
 
 // 	arg_lbl = (t_lable*)ft_memalloc(sizeof(t_lable))
-// 	arg_lbl->size = 0;
-// 	arg_lbl->bytes_in_code = 0;
 // 	arg_lbl->name = NULL;
 // 	arg_lbl->in_code = NULL;
 // 	arg_lbl->type = NULL;
-// 	arg_lbl->lables = NULL;
+// 	arg_lbl->label = NULL;
 // 	arg_lbl->nexst = NULL;
 // 	return (arg_lbl);
 //}
 
-t_lable		*init_lables(char *name)
+t_lable		*init_label(char *name)
 {
-	t_lable	*lables;
+	t_lable	*label;
 
-	lables = (t_lable*)ft_memalloc(sizeof(t_lable));
-	lables->name = name;
-	lables->dir = 0;
-	lables->in_arg = NULL;
-	lables->next = NULL;
-	return (lables);
+	label = (t_lable*)ft_memalloc(sizeof(t_label));
+	label->name = name;
+	label->in_arg = NULL;
+	label->next = NULL;
+	return (label);
 }
 
 t_holder		*init_holder(void)
@@ -56,7 +53,7 @@ t_holder		*init_holder(void)
 	holder = (t_holder*)ft_memalloc(sizeof(t_holder));
 	holder->header = init_header();
 	holder->arg_lbl = NULL;
-	holder->lables = NULL;
+	holder->label = NULL;
 	holder->binary = NULL;
 	return (holder);
 }

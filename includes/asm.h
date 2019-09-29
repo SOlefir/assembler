@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 20:28:59 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 23:15:35 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef unsigned int	uint;
 
-typedef struct  s_lable			t_lable;
+typedef struct  s_label			t_lable;
 typedef struct  s_arg_lbl		t_arg_lbl;
 typedef struct  s_holder		t_holder;
 typedef struct  s_binary		t_binary;
@@ -39,12 +39,12 @@ extern int		g_byte_n;
 **		STRUCTURES
 */
 
-struct			s_lable
+struct			s_label
 {
 	char 			*name;
 	int 			value;
 	t_arg_lbl	 	*in_arg;
-	t_lable			*next;
+	t_label			*next;
 };
 
 struct			s_arg_lbl
@@ -53,45 +53,46 @@ struct			s_arg_lbl
 	char			*type;// (dir/indir)
 	char			*in_code;
 	int				size;
-	int				bytes_in_code;
-	t_lable  		*lables;
+	int				bytes_count;
+	t_label  		*labels;
 	t_arg_lbl	 	*next;
 };
 
-struct 			s_binary
+struct 			s_code
 {
-	char		*code;
-	uint		size;
-	t_binary	*next;
+	char	*code;
+	uint	size;
+	int		bytes_count;
+	t_code	*next;
 };
 
 struct			s_holder
 {
-	t_lable		*lables;
+	t_label		*labels;
 	t_arg_lbl	*arg_lbl;
 	t_header	*header;
-	t_binary	*binary;
+	t_code		*code;
 };
 
 struct			s_op
 {
 	char	*name_op;
-	uint	params;
-	uint	types[3];
-	uint	index;
-	uint	cyexec;
+	int		agr;
+	int		arg_types[3];
+	int		code_op;
+	int		cyecles;
 	char	*comment;
-	_Bool	typeflag;
-	_Bool	halfdir;
+	_Bool	octet;
+	_Bool	lbl_size;
 };
 
 
 t_holder		*init_holder(void);
 t_header		*init_header(void);
-t_lable			*init_lables(void);
-t_arg_lbl		*init_arg_lable(void);
+t_label			*init_labels(void);
+t_arg_lbl		*init_arg_label(void);
 
-_Bool			is_lable(char *str);
+_Bool			is_label(char *str);
 _Bool			is_instruction(char *str);
 _Bool			is_(char *cmd, char *str);
 
@@ -100,7 +101,7 @@ char			*extract_from_quotes(int fd, char quote, char **str);
 void			get_name_comment(int fd, t_header **header);
 void			make_binary_code(t_holder **holder);
 char			*make_name(char	*file_name);
-void			insert_lables(t_holder **holder);
+void			insert_labels(t_holder **holder);
 
 void			error_exit(char *massage, int byte);
 

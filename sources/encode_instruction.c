@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_instruction.c                                   :+:      :+:    :+:   */
+/*   encode_instruction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/29 20:12:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 23:07:05 by solefir          ###   ########.fr       */
+/*   Created: 2019/09/29 23:35:22 by solefir           #+#    #+#             */
+/*   Updated: 2019/09/30 00:24:35 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-_Bool is_instruction(char *str)
+char	*encode_instruct(char *instruct, t_op *op)
 {
- 	char	c;
- 	int		op_len;
- 	int		i;
+	int		i;
+	char	*code;
 
- 	i = -1;
-	while (++i < 16)
+	code = ft_atoi(op.code_op);
+	i = ft_strlen(op.name);
+	while (instruct[++i] != '\0')
 	{
-		op_len = ft_strlen(g_op_tab[i].name_op);
-		c = str[op_len];
-		str[op_len] = 0;
-		if (!ft_strcmp(str, g_op_tab[i].name_op))
-		{
-			str[op_len] = c;
-			return 1;
-		}
-		str[op_len] = c;
+		i += skip_whitespaces(instruct[i]);
+		if (instruct[i] == DIRECT_CHAR)
+			code += T_DIR;
+		else if (instruct[i] == 'r')
+			code += T_REG;
+		else if (instruct[i] == ft_isdigit(instruct[i]) || 
+				instruct[i] == LABEL_CHAR)
+			code += T_IND
+		
 	}
-	return 0;
 }

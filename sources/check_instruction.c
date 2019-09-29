@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_instruction.c                                   :+:      :+:    :+:   */
+/*   check_instruction.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/29 20:12:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 23:07:05 by solefir          ###   ########.fr       */
+/*   Created: 2019/09/29 23:34:27 by solefir           #+#    #+#             */
+/*   Updated: 2019/09/30 00:48:06 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-_Bool is_instruction(char *str)
+int		check_instruction(char *instruct)
 {
- 	char	c;
- 	int		op_len;
- 	int		i;
+	int		i;
+	int		leng;
+	t_op	*op;
 
- 	i = -1;
-	while (++i < 16)
+	op = find_op(instruct);
+	i = ft_strlen(op.name_op);
+	while (instruct[i] != '\0')
 	{
-		op_len = ft_strlen(g_op_tab[i].name_op);
-		c = str[op_len];
-		str[op_len] = 0;
-		if (!ft_strcmp(str, g_op_tab[i].name_op))
-		{
-			str[op_len] = c;
-			return 1;
-		}
-		str[op_len] = c;
+		if (op.)
 	}
-	return 0;
+	return (op);
 }

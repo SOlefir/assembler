@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 20:32:59 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 22:35:46 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 void	get_instruction(int fd_arg, t_holder **holder)
 {
 	char	*line;
-	char	*lable;
+	char	*label;
 	int		len_lbl;
 	int		i;
 
 	line = NULL;
-	lable = NULL;
+	label = NULL;
 	while (get_next_line(fd_arg, &line) && (i = skip_whitespaces(line)) >= 0)
 	{
 		g_str_n++;
 		if (is_unnecessary(&line, i))
 			continue ;
-		if (len_lbl = is_lable(&line[i]))
+		if (len_lbl = is_label(&line[i]))
 		{
-			lable = ft_strdup(&line[i], len_lbl);
+			label = ft_strdup(&line[i], len_lbl);
 			if (is_instruction(&line[i + len_lbl]))
-				save_instruction_code(&line[i + len_lbl], &holder, lable);
+				save_instruction_code(&line[i + len_lbl], &holder, label);
 		}
 		else if (is_instruction(&line[i]))
-			save_instruction_code(&line[i], &holder, lable);
+			save_instruction_code(&line[i], &holder, label);
 		ft_strdel(&line);
-		if (!(holder->binary->code) && !lable)
+		if (!(holder->binary->code) && !label)
 			break ;
 	}
 }

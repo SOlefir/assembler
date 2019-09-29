@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 20:11:36 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 22:37:39 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static _Bool	is_lblchar(char c)
 		|| c == '_') ? 1 : 0);
 }
 
-int			is_lable(char *str)
+int			is_label(char *str)
 {
 	int i;
 
