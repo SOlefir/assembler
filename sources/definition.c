@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/28 16:47:47 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 16:33:41 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ _Bool	is_lable(char *str)
 	return (0);
 }
 
-// _Bool	is_instruction(char *str)
-// {
-// 	int i;
+_Bool	is_instruction(char *str)
+{
+	int i;
 
-// 	i = -1;
-// 	while (++i < 17) 
-// 		if (ft_strcmp(g_op_tab[i].name_op, str) != 0)
-// 			return (1);
-// 	return (0);
-// }
+	i = -1;
+	while (++i < 17)
+		if (ft_strcmp(g_op_tab[i].name_op, str) != 0)
+			return (1);
+	return (0);
+}
 
-_Bool		is_unnecessary(char **line, int i)
+_Bool	is_unnecessary(char **line, int i)
 {
 	if ((*line)[i] == '\0' || (*line)[i] == COMMENT_CHAR)
 	{
@@ -52,7 +52,7 @@ _Bool		is_unnecessary(char **line, int i)
 
 _Bool	is_(char *cmd, char *str)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	i = ft_strlen(cmd);
@@ -61,4 +61,3 @@ _Bool	is_(char *cmd, char *str)
 			return (0);
 	return (1);
 }
-

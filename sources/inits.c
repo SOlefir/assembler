@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/27 20:10:43 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 16:35:06 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_header		*init_header(void)
 	header = (t_header*)ft_memalloc(sizeof(t_header));
 	header->magic = COREWAR_EXEC_MAGIC;
 	header->prog_size = 0;
-	return(header);
+	return (header);
 }
 
 // t_arg_lbl		*init_arg_lable(void)
@@ -49,7 +49,7 @@ t_header		*init_header(void)
 // 	return (lables);
 // }
 
-t_holder	*init_holder(void)
+t_holder		*init_holder(void)
 {
 	t_holder	*holder;
 

@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/28 21:40:20 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 16:30:36 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void			ft_lstappend(t_list **alst, t_list *new)
 	if (*alst == NULL)
 	{
 		*alst = new;
-		return;
+		return ;
 	}
 	now = *alst;
 	while (now->next)
@@ -50,7 +50,7 @@ char				*collapse_list(t_list **head, size_t n)
 	now = *head;
 	total = ft_strlen((char *)now->content);
 	while ((now = now->next))
-			total += ((now->next) ? ft_strlen((char *)now->content) : n) + 1;
+		total += ((now->next) ? ft_strlen((char *)now->content) : n) + 1;
 	ret = (char *)ft_memalloc(sizeof(char) * (total + 1));
 	now = *head;
 	while (now)
