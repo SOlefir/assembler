@@ -6,11 +6,21 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 16:27:02 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 16:49:17 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+static _Bool	empty_nc(char *command)
+{
+	int	i;
+
+	i = skip_whitespaces(command);
+	if (command == NULL || command[i] == '\0')
+		return (1);
+	return (0);
+}
 
 static void		last_check_nc(char *name, char *comment)
 {
@@ -22,16 +32,6 @@ static void		last_check_nc(char *name, char *comment)
 		error_exit("comment is biger than...", 0);
 	if (ft_strlen(name) > PROG_NAME_LENGTH)
 		error_exit("name is biger than...", 0);
-}
-
-static _Bool	empty_nc(char *command)
-{
-	int	i;
-
-	i = skip_whitespaces(command);
-	if (command == NULL || command[i] == '\0')
-		return (1);
-	return (0);
 }
 
 static char		*get_quote(int fd, char *line, int size_cmd)

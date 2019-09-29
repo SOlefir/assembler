@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/28 16:43:25 by solefir          ###   ########.fr       */
+/*   Updated: 2019/09/29 16:48:27 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define ASM_H 
 
 #include "op.h"
-#include "libft.h"
+#include "../libft/libft.h"
+#include <fcntl.h>
 /*
 **		TYPEDEF
 */
