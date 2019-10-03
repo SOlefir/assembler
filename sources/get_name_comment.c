@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/03 13:46:31 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/03 16:25:13 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static _Bool	empty_nc(char *command)
 {
 	int	i;
 
+	if (command == NULL)
+		return (1);
 	i = skip_whitespaces(command);
 	if (command == NULL || command[i] == '\0')
 		return (1);
@@ -24,6 +26,11 @@ static _Bool	empty_nc(char *command)
 
 static void		last_check_nc(char *name, char *comment)
 {
+	if ((is_(NAME_CMD_STRING, line) && name) ||
+		is_(COMMENT_CMD_STRING, line) && comment)
+		error_exit("повтор команды или мусор на этой строке", 0);
+	if (name == NULL && comment == NULL)
+		error_exit("неопределена команда", 0);	
 	if (empty_nc(name))
 		error_exit("There is no name.", 0);
 	if (empty_nc(comment))
@@ -77,6 +84,8 @@ static void		save_in_heder(t_header **header, char *name, char *comment)
 			(*header)->comment[i] = comment[i];
 		else
 			(*header)->comment[i] = 0;
+	ft_strdel(&name);
+	ft_strdel(&comment);
 }
 
 void			get_name_comment(int fd, t_header **header)
@@ -95,15 +104,13 @@ void			get_name_comment(int fd, t_header **header)
 		g_str_n++;
 		if (is_unnecessary(&line, i))
 			continue ;
-		if (is_(NAME_CMD_STRING, &line[i]))
+		if (is_(NAME_CMD_STRING, &line[i]) && !name)
 			name = get_quote(fd, line, ft_strlen(NAME_CMD_STRING) + i);
-		else if (is_(COMMENT_CMD_STRING, &line[i]))
+		else if (is_(COMMENT_CMD_STRING, &line[i]) && !comment)
 			comment = get_quote(fd, line, ft_strlen(COMMENT_CMD_STRING) + i);
-		if ((name && comment) || (!name && !comment))
+		else if ((name && comment) || !name || !comment)
 			break ;
 	}
-	last_check_nc(name, comment);
+	last_check_nc(name, comment, &line[i]);
 	save_in_heder(header, name, comment);
-	ft_strdel(&name);
-	ft_strdel(&comment);
 }

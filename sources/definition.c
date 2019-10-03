@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 22:37:39 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/03 14:44:36 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ _Bool			is_unnecessary(char **line, int i)
 
 _Bool			is_(char *cmd, char *str)
 {
+	int	len_cmd;
 	int	i;
 
-	i = 0;
-	i = ft_strlen(cmd);
-	while (--i)
+	i = -1;
+	len_cmd = ft_strlen(cmd);
+	while (++i < len_cmd)
 		if (str[i] != cmd[i])
 			return (0);
 	return (1);
