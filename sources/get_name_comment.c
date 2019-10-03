@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 16:56:05 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/03 13:46:31 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void		save_in_heder(t_header **header, char *name, char *comment)
 
 	i = 0;
 	ft_printf("\nname: %s\ncomment: %s\n", name, comment);
-	last_check_nc(name, comment);
 	while (++i <= PROG_NAME_LENGTH + 1)
 		if (name[i])
 			(*header)->prog_name[i] = name[i];
@@ -103,6 +102,7 @@ void			get_name_comment(int fd, t_header **header)
 		if ((name && comment) || (!name && !comment))
 			break ;
 	}
+	last_check_nc(name, comment);
 	save_in_heder(header, name, comment);
 	ft_strdel(&name);
 	ft_strdel(&comment);

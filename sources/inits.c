@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 23:14:07 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/03 13:44:17 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ t_header		*init_header(void)
 // 	return (arg_lbl);
 //}
 
-t_lable		*init_label(char *name)
-{
-	t_lable	*label;
+// t_lable		*init_label(char *name)
+// {
+// 	t_lable	*label;
 
-	label = (t_lable*)ft_memalloc(sizeof(t_label));
-	label->name = name;
-	label->in_arg = NULL;
-	label->next = NULL;
-	return (label);
-}
+// 	label = (t_lable*)ft_memalloc(sizeof(t_label));
+// 	label->name = name;
+// 	label->in_arg = NULL;
+// 	label->next = NULL;
+// 	return (label);
+// }
 
 t_holder		*init_holder(void)
 {
