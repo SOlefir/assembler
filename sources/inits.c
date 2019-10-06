@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/07 00:36:21 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/07 00:54:19 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ t_header		*init_header(void)
 
 // 	arg_lbl = (t_lable*)ft_memalloc(sizeof(t_lable))
 // 	arg_lbl->name = NULL;
-// 	arg_lbl->in_code = NULL;
-// 	arg_lbl->type = NULL;
+// 	arg_lbl->where = NULL;
+//	arg_lbl->code = NULL;
 // 	arg_lbl->label = NULL;
-// 	arg_lbl->nexst = NULL;
+// 	arg_lbl->next = NULL;
 // 	return (arg_lbl);
 //}
 

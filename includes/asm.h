@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/07 00:29:35 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/07 00:53:51 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ extern int		g_byte_n;
 **		STRUCTURES
 */
 
-struct			s_label
+struct			s_lbl
 {
 	char			*name;
 	int				value;
@@ -50,15 +50,14 @@ struct			s_label
 
 struct			s_arg_lbl
 {
-	char			*name_lbl;
-	char			*in_code;
-	int				size;
-	int				bytes_count;
+	char			*name;
+	char			*where;
+	t_code			*code;
 	t_label			*labels;
 	t_arg_lbl		*next;
 };
 
-struct			s_code
+struct			s_code //возможно стоит заменить на либовские листы 
 {
 	char	*code;
 	int		size;
@@ -68,7 +67,7 @@ struct			s_code
 struct			s_holder
 {
 	int			bytes_count;
-	t_label		*labels;
+	t_lbl		*labels;
 	t_arg_lbl	*arg_lbl;
 	t_header	*header;
 	t_code		*code;

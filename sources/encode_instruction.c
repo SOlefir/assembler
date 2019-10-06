@@ -6,13 +6,13 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 23:35:22 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/07 00:33:16 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/07 00:48:12 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-char	*encode_instruct(char *instruct, int len_code)
+char	*encode_instruct(char *instruct, t_code **code)
 {
-	
+
 }
