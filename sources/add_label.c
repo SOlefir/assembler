@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_instruction.c                                :+:      :+:    :+:   */
+/*   add_label.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/29 23:34:27 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/30 00:48:06 by solefir          ###   ########.fr       */
+/*   Created: 2019/10/06 15:13:07 by solefir           #+#    #+#             */
+/*   Updated: 2019/10/07 00:01:16 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-int		check_instruction(char *instruct)
+void	add_label(t_label **label, char name_label)
 {
-	int		i;
-	int		leng;
-	t_op	*op;
-
-	op = find_op(instruct);
-	i = ft_strlen(op.name_op);
-	while (instruct[i] != '\0')
+	if (*label == NULL)
 	{
-		if (op.)
+		(*labels) = init_labels(NULL);
+		(*labels)->next = init_labels(label);
 	}
-	return (op);
+	else
+		(*labels)->next = init_labels(label);
 }

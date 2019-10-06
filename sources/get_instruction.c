@@ -6,40 +6,40 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/03 13:44:30 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/07 00:20:19 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-void	get_instruction(int fd_arg, t_holder **holder)
+void	get_instruction(int fd_arg, t_holder *holder)
 {
 	char	*line;
-	char	*label;
+	char	*label_name;
 	int		len_lbl;
 	int		i;
 
 	line = NULL;
-	label = NULL;
 	while (get_next_line(fd_arg, &line) && (i = skip_whitespaces(line)) >= 0)
 	{
+		label_name = NULL;
 		g_str_n++;
 		if (is_unnecessary(&line, i))
 			continue ;
 		if (len_lbl = is_label(&line[i]))
 		{
-			label = ft_strdup(&line[i], len_lbl);
-			if (is_instruction(&line[i + len_lbl]))
-				save_instruction_code(&line[i + len_lbl], &holder, label);
+			label_name = ft_strndup(&line[i], len_lbl);
+			add_label(&(holder->labels), label_name);
+			holder->labels->byte_in_code = holder->bytes_count;
+			i += skip_whitespaces(line);
 		}
-		else if (is_instruction(&line[i]))
-			save_instruction_code(&line[i], &holder, label);
+		if (is_instruction(&line[i]))
+			save_instruction_code(&line[i], holder);
 		ft_strdel(&line);
 		if (!(holder->binary->code) && !label)
 			break ;
 	}
 }
-
 
 // 0. считываю строку
 // 	1. распознаю команды, 

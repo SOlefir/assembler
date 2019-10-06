@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   definition.c                                       :+:      :+:    :+:   */
+/*   is_.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/03 14:44:36 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/06 15:08:13 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			is_label(char *str)
 	{
 		while (is_lblchar(str[i]))
 			i++;
-		if (str[i++] == 'LABEL_CHAR' && i += skip_whitespaces(&str[i]) >= 0)
+		if (str[i++] == 'LABEL_CHAR')// && i += skip_whitespaces(&str[i]) >= 0)
 			return (i);
 	}
 	return (0);

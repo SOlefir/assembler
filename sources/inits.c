@@ -6,11 +6,21 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/03 13:44:17 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/07 00:36:21 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+t_code			*init_code(int len_code)
+{
+	t_code	*code;
+
+	code = (t_code*)ft_memalloc(sizeof(t_code));
+	code->size = len_code;
+	code = (char*)ft_memalloc(len_code);
+	code->next = NULL;
+}
 
 t_header		*init_header(void)
 {
@@ -35,16 +45,16 @@ t_header		*init_header(void)
 // 	return (arg_lbl);
 //}
 
-// t_lable		*init_label(char *name)
-// {
-// 	t_lable	*label;
+t_lbl		*init_label(char *name)
+{
+	t_lbl	*label;
 
-// 	label = (t_lable*)ft_memalloc(sizeof(t_label));
-// 	label->name = name;
-// 	label->in_arg = NULL;
-// 	label->next = NULL;
-// 	return (label);
-// }
+	label = (t_lbl*)ft_memalloc(sizeof(t_lbl));
+	label->name = name;
+	label->in_arg = NULL;
+	label->next = NULL;
+	return (label);
+}
 
 t_holder		*init_holder(void)
 {
@@ -52,8 +62,9 @@ t_holder		*init_holder(void)
 
 	holder = (t_holder*)ft_memalloc(sizeof(t_holder));
 	holder->header = init_header();
+	holder->bytes_count = 0;
 	holder->arg_lbl = NULL;
-	holder->label = NULL;
+	holder->labels = NULL;
 	holder->binary = NULL;
 	return (holder);
 }

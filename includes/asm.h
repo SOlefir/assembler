@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 23:15:35 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/07 00:29:35 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 
 typedef unsigned int	uint;
 
-typedef struct  s_label			t_lable;
-typedef struct  s_arg_lbl		t_arg_lbl;
-typedef struct  s_holder		t_holder;
-typedef struct  s_binary		t_binary;
-typedef struct  s_op			t_op;
+typedef struct s_label			t_label;
+typedef struct s_arg_lbl		t_arg_lbl;
+typedef struct s_holder			t_holder;
+typedef struct s_binary			t_binary;
+typedef struct s_op				t_op;
 
 /*
 **		GLOBALS
@@ -41,33 +41,33 @@ extern int		g_byte_n;
 
 struct			s_label
 {
-	char 			*name;
-	int 			value;
-	t_arg_lbl	 	*in_arg;
+	char			*name;
+	int				value;
+	int				byte_in_code;
+	t_arg_lbl		*in_arg;
 	t_label			*next;
 };
 
 struct			s_arg_lbl
 {
 	char			*name_lbl;
-	char			*type;// (dir/indir)
 	char			*in_code;
 	int				size;
 	int				bytes_count;
-	t_label  		*labels;
-	t_arg_lbl	 	*next;
+	t_label			*labels;
+	t_arg_lbl		*next;
 };
 
-struct 			s_code
+struct			s_code
 {
 	char	*code;
-	uint	size;
-	int		bytes_count;
+	int		size;
 	t_code	*next;
 };
 
 struct			s_holder
 {
+	int			bytes_count;
 	t_label		*labels;
 	t_arg_lbl	*arg_lbl;
 	t_header	*header;
@@ -85,7 +85,6 @@ struct			s_op
 	_Bool	octet;
 	_Bool	lbl_size;
 };
-
 
 t_holder		*init_holder(void);
 t_header		*init_header(void);
