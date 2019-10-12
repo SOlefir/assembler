@@ -81,6 +81,6 @@ char				*extract_from_quotes(int fd, char quote, char **str)
 		ft_lstappend(&head, ft_lstnewsimple(*str));
 	}
 	if (!end)
-		error_exit("quote is not closed", 0);
+		error_exit("Quote is not closed!", 0);
 	return (collapse_list(&head, end - *str));
 }

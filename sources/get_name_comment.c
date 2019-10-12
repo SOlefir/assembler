@@ -24,22 +24,23 @@ static _Bool	empty_nc(char *command)
 	return (0);
 }
 
-static void		last_check_nc(char *name, char *comment)
+static void		last_check_nc(char *name, char *comment, char *line)
 {
 	if ((is_(NAME_CMD_STRING, line) && name) ||
-		is_(COMMENT_CMD_STRING, line) && comment)
-		error_exit("повтор команды или мусор на этой строке", 0);
+		(is_(COMMENT_CMD_STRING, line) && comment))
+		error_exit("Repeating command or invalid character!", 0);
 	if (name == NULL && comment == NULL)
-		error_exit("неопределена команда", 0);	
+		error_exit("No name and comment command or use of unknown command!", 0);	
 	if (empty_nc(name))
-		error_exit("There is no name.", 0);
+		error_exit("No name command!", 0);
 	if (empty_nc(comment))
-		error_exit("There is no comment.", 0);
+		error_exit("No comment command!", 0);
 	if (ft_strlen(comment) > COMMENT_LENGTH)
-		error_exit("comment is biger than...", 0);
+		error_exit("Player comment is longer than 2048 bytes!", 0);
 	if (ft_strlen(name) > PROG_NAME_LENGTH)
-		error_exit("name is biger than...", 0);
+		error_exit("Player name is longer than 128 bytes!", 0);
 }
+
 
 static char		*get_quote(int fd, char *line, int size_cmd)
 {
@@ -58,11 +59,11 @@ static char		*get_quote(int fd, char *line, int size_cmd)
 		quot = extract_from_quotes(fd, '"', &temp);
 	}
 	else
-		error_exit("Have`n quotes", 0);//написать что имя заданно не корректно
+		error_exit("Quotes have error!", 0);//написать что имя заданно не корректно
 	end_quot = ft_strchr(temp, '"');
 	i = skip_whitespaces(end_quot) + 1;
 	if (end_quot[i] != '\0' && end_quot[i] != COMMENT_CHAR)
-		error_exit("garbadge after quotes", 0);
+		error_exit("Invalid character after quotes!", 0);
 	ft_strdel(&temp);
 	return (quot);
 }
