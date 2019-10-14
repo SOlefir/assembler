@@ -26,6 +26,7 @@ typedef struct s_label			t_label;
 typedef struct s_arg_lbl		t_arg_lbl;
 typedef struct s_holder			t_holder;
 typedef struct s_binary			t_binary;
+typedef struct s_args			t_args;
 typedef struct s_op				t_op;
 
 /*
@@ -55,6 +56,14 @@ struct			s_arg_lbl
 	t_code			*code;
 	t_label			*labels;
 	t_arg_lbl		*next;
+};
+
+struct			t_args
+{
+	int		size_code;
+	int		count_args;
+	int		*args;
+
 };
 
 struct			s_code //возможно стоит заменить на либовские листы 

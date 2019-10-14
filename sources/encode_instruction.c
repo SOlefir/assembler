@@ -12,7 +12,7 @@
 
 #include "../includes/asm.h"
 
-char	*encode_instruct(char *instruct, t_code **code)
+char	*encode_instruct(char *instruct, t_code **code, t_op *op)
 {
 
 }

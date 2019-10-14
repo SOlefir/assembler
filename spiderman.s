@@ -28,3 +28,9 @@ say_live:
 	    live %1
 	    zjmp %:say_live
 end:   
+
+
+
+r1, %:say_live, %1
+
+ld %20, r2

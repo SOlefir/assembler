@@ -18,7 +18,7 @@ t_code			*init_code(int len_code)
 
 	code = (t_code*)ft_memalloc(sizeof(t_code));
 	code->size = len_code;
-	code = (char*)ft_memalloc(len_code);
+	code = NULL;
 	code->next = NULL;
 }
 
@@ -65,6 +65,6 @@ t_holder		*init_holder(void)
 	holder->bytes_count = 0;
 	holder->arg_lbl = NULL;
 	holder->labels = NULL;
-	holder->binary = NULL;
+	holder->code = init_code;
 	return (holder);
 }

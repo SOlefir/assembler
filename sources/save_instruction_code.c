@@ -12,6 +12,8 @@
 
 #include "../includes/asm.h"
 
+
+
 static void	add_value_to_label(t_lbl **labels, int where_instruct)
 {
 	t_lbl	*temp;
@@ -26,16 +28,18 @@ static void	add_value_to_label(t_lbl **labels, int where_instruct)
 	*labels = temp;
 }
 
-void		save_instruction_code(char *instruct, t_holder *holder)
+void		save_instruction_code(char *line, t_holder *holder)
 {
-	int len_code;
+	t_op	*operation;
+	t_arg	*arguments;
 
-	len_code = parse_code(instruct); // подсчет байтов + валидация.
+	operation = find_op(line);
+	arguments = parse_code(line, operation);
+	holder->code = encode_instruction(arguments, operation);
 	if (holder->labels != NULL)
-		add_value_to_label(&(holder->labels), holder->bytes_count);	
-	holder->code = init_code(len_code);
-	encode_instruction(instruct, &(holder->code));
-	holder->bytes_count += len_code;
+		add_value_to_label(&(holder->labels), holder->bytes_count);
+	holder->bytes_count += holder->size;
+	free_args(arguments);// <<======= 
 }
 
 // 1. если есть метка, то записать ее значение (в цикле. если в метке не записано значение,
