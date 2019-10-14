@@ -1,21 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   op.c                                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/02 17:31:55 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/14 19:50:57 by solefir          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../includes/asm.h"
+#include <stdio.h>
+#include "./includes/op.h"
+
+typedef struct			s_op
+{
+	char	*name_op;
+	int		agr;
+	int		arg_types[3];
+	int		code_op;
+	int		cyecles;
+	char	*comment;
+	_Bool	octet;
+	_Bool	lbl_size;
+}						t_op;
+
 
 t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
+	
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
+
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
 	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
 	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
@@ -26,8 +31,10 @@ t_op	g_op_tab[17] =
 	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
 		"ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 0},
 	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1},
+
 	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
 		"load index", 1, 1},
+	
 	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
 		"store index", 1, 1},
 	{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
@@ -38,3 +45,19 @@ t_op	g_op_tab[17] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
+
+int		main(void)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 1;
+	printf("T_REG = %i\n", T_REG);
+	printf("T_DIR = %i\n", T_DIR);
+	printf("T_IND = %i\n", T_IND);
+	
+	printf("\n%i\n", g_op_tab[i].arg_types[j]);
+	printf("%i\n", g_op_tab[i].arg_types[++j]);
+	printf("%i\n", g_op_tab[i].arg_types[++j]);
+}

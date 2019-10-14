@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:18:01 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/14 16:00:43 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/14 23:16:45 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		save_instruction_code(char *line, t_holder *holder, t_op *op)
 		add_value_to_label(&(holder->labels), holder->bytes_count);
 	holder->code = encode_instruction(arguments, op, holder);
 	holder->bytes_count += holder->size;
-	free_args(arguments);// <<======= 
+	free_args(arguments);// <<======= тест s
 }
 
 // 1. если есть метка, то записать ее значение (в цикле. если в метке не записано значение,

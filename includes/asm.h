@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/14 15:50:03 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/15 00:16:00 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ struct			t_arg_lbl
 
 struct			t_args
 {
-	int		size_code;
+	int		types_code;
 	int		count_args;
+	int		size_arg;
 	int		*args;
+	char	*label;
 
 };
 
