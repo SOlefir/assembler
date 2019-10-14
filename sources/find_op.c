@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_instruction.c                                   :+:      :+:    :+:   */
+/*   find_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:12:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/06 17:05:18 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/14 16:12:08 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-_Bool is_instruction(char *str)
+t_op 	*find_op(char *str)
 {
  	char	c;
  	int		op_len;
@@ -27,9 +27,9 @@ _Bool is_instruction(char *str)
 		if (!ft_strcmp(str, g_op_tab[i].name_op))
 		{
 			str[op_len] = c;
-			return (1);
+			return (&g_op_tab[i]);
 		}
 		str[op_len] = c;
 	}
-	return (0);
+	return (NULL);
 }

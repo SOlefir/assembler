@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/07 00:53:51 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/14 15:50:03 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ extern int		g_byte_n;
 **		STRUCTURES
 */
 
-struct			s_lbl
+struct			t_lbl
 {
 	char			*name;
 	int				value;
@@ -49,7 +49,7 @@ struct			s_lbl
 	t_label			*next;
 };
 
-struct			s_arg_lbl
+struct			t_arg_lbl
 {
 	char			*name;
 	char			*where;
@@ -66,14 +66,14 @@ struct			t_args
 
 };
 
-struct			s_code //возможно стоит заменить на либовские листы 
+struct			t_code //возможно стоит заменить на либовские листы 
 {
 	char	*code;
 	int		size;
 	t_code	*next;
 };
 
-struct			s_holder
+struct			t_holder
 {
 	int			bytes_count;
 	t_lbl		*labels;
@@ -82,7 +82,7 @@ struct			s_holder
 	t_code		*code;
 };
 
-struct			s_op
+struct			t_op
 {
 	char	*name_op;
 	int		agr;
@@ -100,9 +100,10 @@ t_label			*init_labels(void);
 t_arg_lbl		*init_arg_label(void);
 
 _Bool			is_label(char *str);
-_Bool			is_instruction(char *str);
 _Bool			is_(char *cmd, char *str);
+_Bool			is_unnecessary(char **line, int i);
 
+t_op 			*find_op(char *str);
 char			*extract_from_quotes(int fd, char quote, char **str);
 
 void			get_name_comment(int fd, t_header **header);
@@ -112,7 +113,7 @@ void			insert_labels(t_holder **holder);
 
 void			error_exit(char *massage, int byte);
 
-_Bool			is_unnecessary(char **line, int i);
+
 int				skip_whitespaces(char *str);
 
 // void			check_nc(char *str, char f);

@@ -6,13 +6,24 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:18:01 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/07 00:56:24 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/14 16:00:43 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-
+static void	free_args(t_arg **arguments)
+{
+	if (*arguments == NULL)
+		return ();
+	if (!(*arguments)->args == NULL)
+	{
+		free((*arguments)->args);
+		(*arguments)->args = NULL;
+	}
+	free(*arguments);
+	*arguments = NULL;
+}
 
 static void	add_value_to_label(t_lbl **labels, int where_instruct)
 {
@@ -28,16 +39,14 @@ static void	add_value_to_label(t_lbl **labels, int where_instruct)
 	*labels = temp;
 }
 
-void		save_instruction_code(char *line, t_holder *holder)
+void		save_instruction_code(char *line, t_holder *holder, t_op *op)
 {
-	t_op	*operation;
 	t_arg	*arguments;
 
-	operation = find_op(line);
-	arguments = parse_code(line, operation);
-	holder->code = encode_instruction(arguments, operation);
+	arguments = parse_code(line, op);
 	if (holder->labels != NULL)
 		add_value_to_label(&(holder->labels), holder->bytes_count);
+	holder->code = encode_instruction(arguments, op, holder);
 	holder->bytes_count += holder->size;
 	free_args(arguments);// <<======= 
 }

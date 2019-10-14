@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/06 15:08:13 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/14 15:56:07 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static _Bool	is_lblchar(char c)
 		|| c == '_') ? 1 : 0);
 }
 
-int			is_label(char *str)
+char			*is_label(char *str)
 {
 	int i;
 
@@ -27,10 +27,10 @@ int			is_label(char *str)
 	{
 		while (is_lblchar(str[i]))
 			i++;
-		if (str[i++] == 'LABEL_CHAR')// && i += skip_whitespaces(&str[i]) >= 0)
-			return (i);
+		if (str[i++] == 'LABEL_CHAR')
+			return (ft_strndup(str, --i));
 	}
-	return (0);
+	return (NULL);
 }
 
 _Bool			is_unnecessary(char **line, int i)

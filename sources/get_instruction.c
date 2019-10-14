@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/07 00:20:19 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/14 15:53:31 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_instruction(int fd_arg, t_holder *holder)
 {
 	char	*line;
-	char	*label_name;
+	t_op	*op;
 	int		len_lbl;
 	int		i;
 
@@ -23,18 +23,18 @@ void	get_instruction(int fd_arg, t_holder *holder)
 	while (get_next_line(fd_arg, &line) && (i = skip_whitespaces(line)) >= 0)
 	{
 		label_name = NULL;
+		op = NULL;
 		g_str_n++;
 		if (is_unnecessary(&line, i))
 			continue ;
-		if (len_lbl = is_label(&line[i]))
+		if (label_name = is_label(&line[i]))
 		{
-			label_name = ft_strndup(&line[i], len_lbl);
 			add_label(&(holder->labels), label_name);
 			holder->labels->byte_in_code = holder->bytes_count;
 			i += skip_whitespaces(line);
 		}
-		if (is_instruction(&line[i]))
-			save_instruction_code(&line[i], holder);
+		if (op = find_op(&line[i]))
+			save_instruction_code(&line[i], holder, op);
 		ft_strdel(&line);
 		if (!(holder->binary->code) && !label)
 			break ;
