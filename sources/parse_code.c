@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/15 00:23:06 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/15 00:28:54 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_args		parse_code(char *instruct, t_op *op)
 
 	i = -1;
 	count_arg = op->arg;
-	ret = (t_instr*)malloc(sizeof(t_instr));
+	ret = (t_instr*)ft_memalloc(sizeof(t_instr));
 	ret->count_arg = count_arg;
 	ret->args = (int*)ft_memalloc(sizeof(int) * count_arg);
 	instruct += ft_strlen(op->name_op) + skip_whitespaces(instruct);
@@ -72,8 +72,7 @@ t_args		parse_code(char *instruct, t_op *op)
 		c = count_arg > 0 ? SEPARATOR_CHAR : '\0';
 		if ((ret->args[++i] = get_argument(&ret, &instruct, op->arg_types[i], c)) < 0)
 			ret->label = ft_strndub(instruct, (instruct - ft_strchr(instruct, c)));
-
 	}
-	ret->bytes_arg = size_code(ret->args);
+	ret->size = size_code(ret->args); // размер аргументов в сумме
 	return (ret);
 }
