@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_label.c                                        :+:      :+:    :+:   */
+/*   atoi_for_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/06 15:13:07 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/07 00:01:16 by solefir          ###   ########.fr       */
+/*   Created: 2019/10/15 21:06:32 by solefir           #+#    #+#             */
+/*   Updated: 2019/10/15 21:16:03 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-void	add_label(t_label **label, char name_label)
+int			atoi_for_args(char **str, char end)
 {
-	if (*label == NULL)
+	int		num;
+	int		neg;
+
+	num = 0;
+	neg = (**str == '-') ? -1 : 1;
+	*str++;
+	while (**str != end && (**str >= '0' && **str <= '9'))
 	{
-		(*labels) = init_labels(NULL);
-		(*labels)->next = init_labels(label);
+		num = num * 10 + (int)**str - (int)'0';
+		*str++;
 	}
-	else
-		(*labels)->next = init_labels(label);
+	return (num * neg);
 }

@@ -31,6 +31,6 @@ end:
 
 
 
-r1, %:say_live, %1
+sti r1, %:say_live, %1
 
 ld %20, r2

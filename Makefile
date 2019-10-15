@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 21:25:16 by dquitzon          #+#    #+#              #
-#    Updated: 2019/10/06 15:05:56 by solefir          ###   ########.fr        #
+#    Updated: 2019/10/15 21:29:57 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,13 @@ LIB		:=	./libft.a
 
 SOURCES	:=	main.c \
 			get_name_comment.c \
-			get_instruction.c \
 			op.c \
-			inits.c \
-			is_.c \
 			errors.c \
-			extract_from_quotes.c \
-			skip_whitespace.c
+			inits.c \
+			#get_instruction.c \
+			#is_.c \
+			#extract_from_quotes.c \
+			#skip_whitespace.c
 
 SOURCES	:=	$(addprefix $(DIR), $(SOURCES))
 

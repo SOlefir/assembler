@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/14 15:53:31 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/15 20:47:13 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	get_instruction(int fd_arg, t_holder *holder)
 	int		i;
 
 	line = NULL;
+	holder->bytes_count = -1;
 	while (get_next_line(fd_arg, &line) && (i = skip_whitespaces(line)) >= 0)
 	{
 		label_name = NULL;
@@ -29,7 +30,8 @@ void	get_instruction(int fd_arg, t_holder *holder)
 			continue ;
 		if (label_name = is_label(&line[i]))
 		{
-			add_label(&(holder->labels), label_name);
+			save_label(NULL, label_name, holder->bytes_count + 1,
+															&(holder->labels));
 			holder->labels->byte_in_code = holder->bytes_count;
 			i += skip_whitespaces(line);
 		}

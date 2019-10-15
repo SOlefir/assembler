@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/07 00:56:08 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/15 21:26:36 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,14 @@ t_header		*init_header(void)
 	return (header);
 }
 
-// t_arg_lbl		*init_arg_lable(char *name)
-// {
-// 	t_arg_lbl	*arg_lbl;
-
-// 	arg_lbl = (t_lable*)ft_memalloc(sizeof(t_lable))
-// 	arg_lbl->name = NULL;
-// 	arg_lbl->where = NULL;
-//	arg_lbl->code = NULL;
-// 	arg_lbl->label = NULL;
-// 	arg_lbl->next = NULL;
-// 	return (arg_lbl);
-//}
+t_args		*init_args(int count_args)
+{
+	t_args	*arg;
+	arg = (t_args*)ft_memalloc(sizeof(t_args));
+	arg->count_args = count_args;
+	arg->args = (int*)ft_memalloc(sizeof(int) * count_args);
+	arg->label = NULL;
+}
 
 t_lbl		*init_label(char *name)
 {
@@ -62,9 +58,7 @@ t_holder		*init_holder(void)
 
 	holder = (t_holder*)ft_memalloc(sizeof(t_holder));
 	holder->header = init_header();
-	holder->bytes_count = 0;
-	holder->arg_lbl = NULL;
 	holder->labels = NULL;
-	holder->code = init_code;
+	holder->code = NULL;
 	return (holder);
 }
