@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 17:06:55 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 18:08:15 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	check_arg(int type, char **instr)
 	int	code;
 
 	code = 0;
+	printf("c->> %c\n", **instr);
 	if ((**instr) == '%' && that_type(T_DIR, type))
 		code = DIR_CODE;
 	else if ((**instr) == 'r' && that_type(T_REG, type))
@@ -50,9 +51,12 @@ static int	check_arg(int type, char **instr)
 		code = IND_CODE;
 	else
 		error_exit("Wrong args", 0);
-	*instr += skip_whitespaces(++(*instr));
-	if ((**instr) != LABEL_CHAR || !ft_isdigit((int)(**instr)))
-		error_exit("Wrong args", 0);
+	(*instr)++;
+	*instr += skip_whitespaces(*instr);
+	// if ((**instr) != LABEL_CHAR || !ft_isdigit((int)(**instr)))
+	// 	error_exit("Wrong args", 0);
+	printf("instr(check)-> [%s]\n", *instr);
+	printf("code: %d\n", code);
 	return (code);
 }
 
@@ -62,11 +66,14 @@ static int	get_arg(int *code, char **instr, int *types, char end_arg)
 
 	arg = 0;
 	*code = check_arg(types[0], instr);
-	if (**instr == LABEL_CHAR && (*instr++))
+	if (**instr == LABEL_CHAR && ++(*(*instr)) != '\0')
 		return (-1);
 	arg = atoi_for_args(instr, end_arg); // сдвигает указатель
+	printf("instr(get)---> [%s]\n", *instr);
 	if (end_arg == SEPARATOR_CHAR && **instr == '\0')
 		error_exit("нет сепар. символа", 0);
+	if (**instr == SEPARATOR_CHAR)
+		(*instr)++;
 	return (arg);
 }
 
@@ -83,13 +90,18 @@ t_args		*parse_code(char *instr, t_op *op)
 	code = 0;
 	count_arg = op->arg;
 	ret = init_args(count_arg);
-	instr += ft_strlen(op->name_op) + skip_whitespaces(instr);
+	instr += ft_strlen(op->name_op) + 1 + skip_whitespaces(instr);
 	while (count_arg)
 	{
+		printf("\n");
 		instr += skip_whitespaces(instr);
-		c = (count_arg == 1) ? '\0' : SEPARATOR_CHAR;
+		printf("instr(parse)-> [%s]\n", instr);
+		c = (count_arg == 0) ? '\0' : SEPARATOR_CHAR;
+		//printf("end_arg: %c\n", c);
 		if ((ret->args[i] = get_arg(&code, &instr, &op->arg_types[i], c)) < 0)
-			ret->label = ft_strndup(instr, (ft_strchr(instr, c)) - instr);
+			ret->label = ft_strndup((instr + 1), (ft_strchr(instr, c) - instr) - 1);
+		printf("lalbel %s\n", ret->label);
+		printf("arg = %d\n", ret->args[i]);
 		ret->size_arg += size_code_args(code, op);
 		ret->types |=  code << (2 * count_arg);
 		count_arg--;

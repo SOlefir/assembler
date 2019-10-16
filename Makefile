@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 21:25:16 by dquitzon          #+#    #+#              #
-#    Updated: 2019/10/16 15:33:28 by solefir          ###   ########.fr        #
+#    Updated: 2019/10/16 17:17:35 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 DIR = ./sources/
 HEADER = ./includes/asm.h ./includes/op.h #./includes/libft.h
-LIB		:=	./libft.a
+LIB		:=	./libft/libft.a
 
 SOURCES	:=	main.c \
 			get_name_comment.c \
