@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/15 21:26:36 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 15:32:08 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_code			*init_code(int len_code)
 	code->size = len_code;
 	code = NULL;
 	code->next = NULL;
+	return (code);
 }
 
 t_header		*init_header(void)
@@ -39,15 +40,16 @@ t_args		*init_args(int count_args)
 	arg->count_args = count_args;
 	arg->args = (int*)ft_memalloc(sizeof(int) * count_args);
 	arg->label = NULL;
+	return (arg);
 }
 
-t_lbl		*init_label(char *name)
+t_lbl		*init_labels(char *name)
 {
 	t_lbl	*label;
 
 	label = (t_lbl*)ft_memalloc(sizeof(t_lbl));
 	label->name = name;
-	label->in_arg = NULL;
+	label->in_code = NULL;
 	label->next = NULL;
 	return (label);
 }

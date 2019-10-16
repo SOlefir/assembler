@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:13:07 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/15 20:43:32 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 15:22:01 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 t_lbl	*find_label(char *name, t_lbl *labels)
 {
-	while (labels != NULL && !t_strcmp(labels->name, name))
+	while (labels != NULL && !ft_strcmp(labels->name, name))
 		labels = labels->next;
 	return (labels);
 }
 
-t_lbl	*add_label(t_label **labels, char name_label)
+t_lbl	*add_label(t_lbl **labels, char *name_label)
 {
 	t_lbl	*temp;
 
-	if (*label == NULL)
+	if (*labels == NULL)
 	{
 		(*labels) = init_labels(NULL);
-		(*labels)->next = init_labels(label);
+		(*labels)->next = init_labels(name_label);
 		return ((*labels)->next);
 	}
 	temp = *labels;
 	while (temp->next != NULL)
 		temp = temp->next;
-	temp->next = init_labels(label);
+	temp->next = init_labels(name_label);
 	return (temp->next);
 }
 

@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/15 21:31:35 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 16:58:58 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,71 +21,75 @@
 **		TYPEDEF
 */
 
-typedef struct s_holder			t_holder;
+
 typedef struct s_op				t_op;
 typedef struct s_args			t_args;
-typedef struct s_lbl			t_lbl;
 typedef struct s_code			t_code;
+typedef struct s_lbl			t_lbl;
+typedef struct s_holder			t_holder;
 
 /*
 ** GLOBAL VAR THAT USED IN FUNCT EXIT_ERRORS 
 */
 
-extern int		g_str_n;
 
 /*
 **		STRUCTURES
 */
 
-struct			t_op
+typedef struct			s_op
 {
 	char	*name_op;
-	int		agr;
+	int		arg;
 	int		arg_types[3];
 	int		code_op;
 	int		cyecles;
 	char	*comment;
 	_Bool	octet;
 	_Bool	lbl_size;
-};
+}						t_op;
 
-struct			t_lbl
+typedef struct			s_lbl
 {
 	char			*name;
 	int				value;
 	char			*in_code;
 	t_lbl			*next;
-};
+}						t_lbl;
 
-struct			t_code //возможно стоит заменить на либовские листы 
+typedef struct			s_code //возможно стоит заменить на либовские листы 
 {
 	char	*code;
 	int		size;
 	t_code	*next;
-};
+}						t_code;
 
-struct			t_holder
+typedef struct			s_holder
 {
 	int			bytes_count;
 	t_lbl		*labels;
 	t_header	*header;
 	t_code		*code;
-};
+}						t_holder;
 
-struct			t_args
+typedef struct			s_args
 {
 	int		types;
 	int		count_args;
 	int		size_arg;
 	int		*args;
 	char	*label;
-};
+}						t_args;
+
+extern int		g_str_n;
+extern t_op		g_op_tab[17];
+
 
 /**  main  **/
 
 void			get_name_comment(int fd, t_header **header);
 void			get_instruction(int fd_arg, t_holder *holder);
-t_args			parse_code(char *instr, t_op *op, t_lbl **label);
+t_args			*parse_code(char *instr, t_op *op);
 void			save_instruction_code(char *line, t_holder *holder, t_op *op);
 void			insert_labels(t_holder **holder);
 void			error_exit(char *massage, int byte);
@@ -100,7 +104,7 @@ t_code			*init_code(int len_code);
 
 /**  definition  **/
 
-_Bool			is_label(char *str);
+char			*is_label(char *str);
 _Bool			is_(char *cmd, char *str);
 _Bool			is_unnecessary(char **line, int i);
 
@@ -108,7 +112,7 @@ _Bool			is_unnecessary(char **line, int i);
 
 void			save_label(char *name, char *in_code,
 							int value, t_lbl **labels);
-t_lbl			*add_label(t_lbl **labels, char name_label);
+t_lbl			*add_label(t_lbl **labels, char *name_label);
 t_lbl			*find_label(char *name, t_lbl *labels);
 
 /**  other  **/

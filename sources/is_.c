@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/14 23:18:06 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 17:07:03 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char			*is_label(char *str)
 	{
 		while (is_lblchar(str[i]))
 			i++;
-		if (str[i++] == 'LABEL_CHAR')
-			return (ft_strndup(str, --i));
+		if (str[i++] == LABEL_CHAR)
+			return (ft_strndup(str, (--i)));
 	}
 	return (NULL);
 }

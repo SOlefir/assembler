@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 21:25:16 by dquitzon          #+#    #+#              #
-#    Updated: 2019/10/15 21:29:57 by solefir          ###   ########.fr        #
+#    Updated: 2019/10/16 15:33:28 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,15 @@ SOURCES	:=	main.c \
 			op.c \
 			errors.c \
 			inits.c \
-			#get_instruction.c \
-			#is_.c \
-			#extract_from_quotes.c \
-			#skip_whitespace.c
+			get_instruction.c \
+			is_.c \
+			extract_from_quotes.c \
+			skip_whitespace.c\
+			parse_code.c\
+			save_instruction_code.c\
+			label.c\
+			atoi_for_args.c\
+			find_op.c\
 
 SOURCES	:=	$(addprefix $(DIR), $(SOURCES))
 

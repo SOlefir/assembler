@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 15:26:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/15 21:32:17 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 15:35:26 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static _Bool	s_file(char *arg)
 int				main(int ac, char **av)
 {
 	t_holder	*holder;
+	t_header	*header;
 	int			fd_arg;
 
 	if (ac != 2 && !s_file(av[ac]))
@@ -35,10 +36,11 @@ int				main(int ac, char **av)
 	if ((fd_arg = open(av[1], O_RDONLY)) < 0)
 		error_exit("read_error", 0);
 	holder = init_holder();
-	get_name_comment(fd_arg, &(holder->header));
-	//get_instruction(fd_arg, holder);
+	header = holder->header;
+	get_name_comment(fd_arg, &header);
+	get_instruction(fd_arg, holder);
 	//insert_label(&holder);
-	close(fd_arg);
+	//close(fd_arg);
 	//write_in_file(make_name(av[1]), holder);
 	//system("leaks asm");
 	return (0);
