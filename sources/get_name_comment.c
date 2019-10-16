@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/03 16:36:20 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 19:48:57 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static _Bool	empty_nc(char *command)
 	return (0);
 }
 
-static void		last_check_nc(char *name, char *comment, char *line)
+static void		last_check_nc(char *name, char *comment)
 {
-	if ((is_(NAME_CMD_STRING, line) && name) ||
-		(is_(COMMENT_CMD_STRING, line) && comment))
-		error_exit("Repeating command or invalid character!", 0);
+	// if ((is_(NAME_CMD_STRING, line) && name) ||
+	// 	(is_(COMMENT_CMD_STRING, line) && comment))
+	// 	error_exit("Repeating command or invalid character!", 0);
 	if (name == NULL && comment == NULL)
-		error_exit("No name and comment command or use of unknown command!", 0);	
+		error_exit("No name and comment command or used of unknown command!", 0);	
 	if (empty_nc(name))
 		error_exit("No name command!", 0);
 	if (empty_nc(comment))
@@ -68,28 +68,31 @@ static char		*get_quote(int fd, char *line, int size_cmd)
 	return (quot);
 }
 
-static void		save_in_heder(t_header **header, char *name, char *comment)
+static void		save_in_heder(t_header *header, char *name, char *comment)
 {
 	int	i;
+	int	j;
 
-	i = 0;
+	i = -1;
+	j = 0;
 	ft_printf("\nname: %s\ncomment: %s\n", name, comment);
-	while (++i <= PROG_NAME_LENGTH + 1)
-		if (name[i])
-			(*header)->prog_name[i] = name[i];
+	while (++i < PROG_NAME_LENGTH + 1)
+		if (name[j] != '\0')
+			header->prog_name[i] = name[j++];
 		else
-			(*header)->prog_name[i] = 0;
-	i = 0;
-	while (++i <= COMMENT_LENGTH + 1)
-		if (comment[i])
-			(*header)->comment[i] = comment[i];
+			header->prog_name[i] = 0;
+	i = -1;
+	j = 0;
+	while (++i < COMMENT_LENGTH + 1)
+		if (comment[j] != '\0')
+			header->comment[i] = comment[j++];
 		else
-			(*header)->comment[i] = 0;
+			header->comment[i] = 0;
 	ft_strdel(&name);
 	ft_strdel(&comment);
 }
 
-void			get_name_comment(int fd, t_header **header)
+void			get_name_comment(int fd, t_header *header)
 {
 	int		i;
 	char	*line;
@@ -109,9 +112,13 @@ void			get_name_comment(int fd, t_header **header)
 			name = get_quote(fd, line, ft_strlen(NAME_CMD_STRING) + i);
 		else if (is_(COMMENT_CMD_STRING, &line[i]) && !comment)
 			comment = get_quote(fd, line, ft_strlen(COMMENT_CMD_STRING) + i);
-		else if ((name && comment) || !name || !comment)
+		else if (!name || !comment)
+			break ;
+		if (name && comment)
 			break ;
 	}
-	last_check_nc(name, comment, &line[i]);
+	//ft_printf("\nname: %s\ncomment: %s\n", name, comment);
+	//printf("%s\n", line);
+	last_check_nc(name, comment);
 	save_in_heder(header, name, comment);
 }

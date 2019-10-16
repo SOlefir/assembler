@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:12:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/14 16:12:08 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 21:58:44 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_op 	*find_op(char *str)
  	int		i;
 
 	i = -1;
-	while (i++ < 16)
+	while (++i < 16)
 	{
 		op_len = ft_strlen(g_op_tab[i].name_op);
 		c = str[op_len];

@@ -1,6 +1,6 @@
 .name   "The spiderman"
 .comment "With great power comes great responsibility"
-	    ld %4, r4
+	    ld %4, r2
 	    sti r1, %:say_live, %1
 	    sti r1, %:loop_live, %1
 start_load:

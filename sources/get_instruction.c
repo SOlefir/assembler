@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 15:04:45 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 21:50:22 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,23 @@ void	get_instruction(int fd_arg, t_holder *holder)
 		label_name = NULL;
 		op = NULL;
 		g_str_n++;
+		printf("\nИНСТРУКЦИЯ\n");
 		if (is_unnecessary(&line, i))
 			continue ;
 		if ((label_name = is_label(&line[i])))
 		{
+			printf("\nИНСТРУКЦИЯ\n");
 			save_label(NULL, label_name, holder->bytes_count + 1,
 															&(holder->labels));
 			holder->labels->value = holder->bytes_count;
-			i += skip_whitespaces(line);
+			printf("\nИНСТРУКЦИЯ\n");
+			i += ft_strlen(label_name) + skip_whitespaces(line);
 		}
 		if ((op = find_op(&line[i])))
 			save_instruction_code(&line[i], holder, op);
 		ft_strdel(&line);
-		if (!(holder->code->code) && !label_name)
-			break ;
+		//if (!(holder->code->code) && !label_name)
+		//	break ;
 	}
 }
 

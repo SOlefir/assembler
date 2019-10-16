@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 21:06:32 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 15:23:04 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 20:12:58 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,21 @@ int			atoi_for_args(char **str, char end)
 {
 	int		num;
 	int		neg;
+	int		i;
 
 	num = 0;
-	neg = (**str == '-') ? -1 : 1;
-	(*str)++;
-	while (**str != end && (**str >= '0' && **str <= '9'))
+	i = 1;
+	neg = 1;
+	if (**str == '-')
 	{
-		num = num * 10 + (int)**str - (int)'0';
+		neg = -1;
+		(*str)++;
+	}
+	while (**str != end)
+	{
+		num *= i;
+		num += **str - '0';
+		i *= 10;
 		(*str)++;
 	}
 	return (num * neg);

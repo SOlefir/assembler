@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 16:58:58 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 19:22:30 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "op.h"
 #include "../libft/libft.h"
 #include <fcntl.h>
+#include "stdio.h"//
 
 /*
 **		TYPEDEF
@@ -87,7 +88,7 @@ extern t_op		g_op_tab[17];
 
 /**  main  **/
 
-void			get_name_comment(int fd, t_header **header);
+void			get_name_comment(int fd, t_header *header);
 void			get_instruction(int fd_arg, t_holder *holder);
 t_args			*parse_code(char *instr, t_op *op);
 void			save_instruction_code(char *line, t_holder *holder, t_op *op);
