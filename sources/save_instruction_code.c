@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:18:01 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 22:09:19 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/17 20:25:25 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		save_instruction_code(char *line, t_holder *holder, t_op *op)
 	arguments = parse_code(line, op);
 	// if (arguments->label) это должно быть в энкод инстр
 	// 	save_label(arguments->label, NULL, -1, );
-	//holder->code = encode_instruction(arguments, op, holder->labels);
-	holder->bytes_count += arguments->size_arg + 1;//уточнить по размеру код октета
+	holder->code = encode_instruction(arguments, op, holder->labels);
+	holder->bytes_count += 
 	free_args(&arguments);
 }

@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 19:22:30 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/17 20:36:41 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,49 +38,60 @@ typedef struct s_holder			t_holder;
 **		STRUCTURES
 */
 
-typedef struct			s_op
+struct			s_op
 {
 	char	*name_op;
-	int		arg;
+	int		count_args;
 	int		arg_types[3];
 	int		code_op;
 	int		cyecles;
 	char	*comment;
 	_Bool	octet;
 	_Bool	lbl_size;
-}						t_op;
+};
 
-typedef struct			s_lbl
+struct			s_lbl
 {
 	char			*name;
 	int				value;
-	char			*in_code;
+	//char			**in_code;
 	t_lbl			*next;
-}						t_lbl;
+};
 
-typedef struct			s_code //возможно стоит заменить на либовские листы 
+struct			s_code //возможно стоит заменить на либовские листы 
 {
 	char	*code;
 	int		size;
 	t_code	*next;
-}						t_code;
+};
 
-typedef struct			s_holder
+struct			s_holder
 {
 	int			bytes_count;
 	t_lbl		*labels;
 	t_header	*header;
-	t_code		*code;
-}						t_holder;
+	t_instruct	*code;
+};
 
-typedef struct			s_args
+struct	s_instruct
 {
-	int		types;
-	int		count_args;
-	int		size_arg;
-	int		*args;
-	char	*label;
-}						t_args;
+	unsigned short	size;
+	char			*str;
+	unsigned short	label_sizes[3];
+	char			*label_places[3];
+	char			*label_names[3];
+	t_instruct		*next;
+};
+
+
+struct			s_args
+{
+	unsigned char		op_code;
+	unsigned char		coding_byte;
+	unsigned char		arg_types[3];
+	int					args[3];
+	char				*labels[3];
+};
 
 extern int		g_str_n;
 extern t_op		g_op_tab[17];
@@ -123,6 +134,10 @@ int				skip_whitespaces(char *str);
 t_op 			*find_op(char *str);
 char			*extract_from_quotes(int fd, char quote, char **str);
 char			*make_name(char	*file_name);
+
+char	*make_name(char *name_champ);
+void	write_uints(int fd, unsigned int out, _Bool size);
+void	write_in_file(char *prog_name, t_holder *holder);
 
 
 #endif

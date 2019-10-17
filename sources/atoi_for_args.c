@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 21:06:32 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 20:12:58 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/17 18:26:26 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			atoi_for_args(char **str, char end)
 		neg = -1;
 		(*str)++;
 	}
-	while (**str != end)
+	while (**str != end || **str != '\0')
 	{
 		num *= i;
 		num += **str - '0';
