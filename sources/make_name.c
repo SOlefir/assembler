@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 13:01:13 by mtrotsen          #+#    #+#             */
-/*   Updated: 2019/10/18 18:34:36 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 19:01:07 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ char	*make_name(char *name_champ)
 		c++;
 		i++;
 	}
+	printf("%s\n", name);
 	return (name);
 }

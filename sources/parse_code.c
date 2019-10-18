@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 18:50:16 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 19:57:11 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static int	that_type(int type, int arg)
 	int	that;
 
 	that = arg & type;
-	printf("%d & %d\n", arg, type);
-	printf("that = %d\n", that);
 	if (that == type)
 		return (1);
 	return (0);
@@ -82,7 +80,9 @@ static int	get_arg(int *code, char **instr, int *types, char end_arg)
 	*code = check_arg(types[0], instr);
 	if (**instr == LABEL_CHAR)// && *(++(*instr)) != '\0')
 		return (-1);
-	arg = atoi_for_args(instr, end_arg); // сдвигает указатель
+	printf("BEFORE %p\n", *instr);
+	arg = atoi_for_args(instr, end_arg); 
+	printf("AFTER %d} %p\n", arg, *instr);
 	if (*code == REG_CODE && (arg < 0 || arg > REG_NUMBER))
 		error_exit("Register number greater or less than permissible", 0);
 	// if ((end_arg == SEPARATOR_CHAR && **instr != end_arg) ||
@@ -116,6 +116,9 @@ t_args		*parse_code(char *instr, t_op *op)
 		c = (count_arg == 1) ? '\0' : SEPARATOR_CHAR;
 		if ((ret->args[i] = get_arg(&code, &instr, &op->arg_types[i], c)) < 0)
 		{
+			// int temp = ft_strchr(instr, c) - instr - 1;
+			// //char *temp1 = (instr + 1);
+			// printf("temp = %d temp = %d\n", p, temp);
 			ret->labels[i] = ft_strndup((instr + 1), (ft_strchr(instr, c) - instr - 1));
 			instr += ft_strlen(ret->labels[i]) + 1;	
 			if (*instr == SEPARATOR_CHAR)
@@ -128,6 +131,7 @@ t_args		*parse_code(char *instr, t_op *op)
 		ret->coding_byte |=  code << (3 - i) * 2;
 		count_arg--;
 		i++;
+		printf("\nstr   ===   %d\n", g_str_n);
 		instr += skip_whitespaces(instr);
 		if (count_arg == 0 && *instr != '\0' &&
 			*instr != COMMENT_CHAR && *instr != ALT_COMMENT_CHAR)

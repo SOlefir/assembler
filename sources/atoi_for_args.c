@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 21:06:32 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 18:26:27 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 20:16:53 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,20 @@ int			atoi_for_args(char **str, char end)
 	num = 0;
 	i = 1;
 	neg = 1;
+	printf("\n          ATOI     \n");
 	(void)end;
 	if (**str == '-')
 	{
 		neg = -1;
 		(*str)++;
 	}
+	printf("%s\n", *str);
 	while (ft_isdigit(**str))
 	{
-		num *= i;
-		num += **str - '0';
-		i *= 10;
-		(*str)++;
+		num += num * 10 + (**str) - '0';
+		(**str)++;
 	}
+	printf("NUM %d\n", num);
+	printf("%s\n\n", *str);
 	return (num * neg);
 }
