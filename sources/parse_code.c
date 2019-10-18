@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 00:52:27 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 01:43:16 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static int	get_arg(int *code, char **instr, int *types)
 t_args		*parse_code(char *instr, t_op *op)
 {
 	int		i;
-	// char	c;
 	int		code;
 	int		count_arg;
 	t_args	*ret;
@@ -79,11 +78,10 @@ t_args		*parse_code(char *instr, t_op *op)
 	instr += skip_whitespaces(instr);
 	while (--count_arg > 0 && (i++))
 	{
-		// c = (count_arg == 1) ? '\0' : SEPARATOR_CHAR;
 		ret->args[i] = get_arg(&code, &instr, &op->arg_types[i]);
 		if (ret->args[i] == -1 && *instr == LABEL_CHAR)
 		{
-			ret->labels[i] = get_lbl_name(&instr);//ft_strndup((instr + 1), (ft_strchr(instr, c) - instr - 1));
+			ret->labels[i] = get_lbl_name(&instr);
 			printf("LABEL [%s]\n", ret->labels[i]);
 		}
 		instr += *instr == SEPARATOR_CHAR ? 1 : 0;
