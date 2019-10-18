@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:23:39 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 23:13:09 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static _Bool	empty_nc(char *command)
 {
-	int	i;
+	// int	i;
 
 	if (command == NULL)
 		return (1);
-	i = skip_whitespaces(command);
-	if (command == NULL || command[i] == '\0')
-		return (1);
+	// i = skip_whitespaces(command);
+	// if (command == NULL || command[i] == '\0')
+	// 	return (1);
 	return (0);
 }
 
