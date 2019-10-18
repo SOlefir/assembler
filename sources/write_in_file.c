@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 22:18:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:38:00 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 00:13:00 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	write_in_file(char *prog_name, t_holder *holder)
 	int			fd;
 	t_instruct	*code_part;
 
-	printf("prog name %s\n", prog_name);
 	fd = open(prog_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	write_uints(fd, holder->header->magic, 0);
 	write(fd, holder->header->prog_name, PROG_NAME_LENGTH);

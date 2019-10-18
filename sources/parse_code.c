@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 22:44:34 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 00:52:27 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,50 +53,43 @@ static int	get_arg(int *code, char **instr, int *types)
 	arg = 0;
 	*code = check_arg(types[0], instr);
 	if (**instr == LABEL_CHAR)
-		return (0);
+		return (-1);
 	arg = atoi_for_args(instr); 
 	if (*code == REG_CODE && (arg < 0 || arg > (1 + REG_NUMBER)))
 		error_exit("Register number greater or less than permissible", 1);
 	if (**instr == SEPARATOR_CHAR)
 		(*instr)++;
-	printf("%d\n", arg);
 	return (arg);
 }
 
 t_args		*parse_code(char *instr, t_op *op)
 {
 	int		i;
-	char	c;
+	// char	c;
 	int		code;
 	int		count_arg;
 	t_args	*ret;
 
-	i = 0;
+	i = -1;
 	code = 0;
-	count_arg = op->count_args;
+	printf("opcode: %s, args: %d\n", op->name_op, op->count_args);
+	count_arg = op->count_args + 1;
 	ret = init_args((unsigned char)op->code_op - 1);
 	instr += ft_strlen(op->name_op);
-	printf("parse str 1[%s]\n", instr);
 	instr += skip_whitespaces(instr);
-	printf("parse str 2[%s]\n", instr);
-	while (count_arg > 0)
+	while (--count_arg > 0 && (i++))
 	{
-		c = (count_arg == 1) ? '\0' : SEPARATOR_CHAR;
-		if (!(ret->args[i] = get_arg(&code, &instr, &op->arg_types[i])) && *instr == LABEL_CHAR)
+		// c = (count_arg == 1) ? '\0' : SEPARATOR_CHAR;
+		ret->args[i] = get_arg(&code, &instr, &op->arg_types[i]);
+		if (ret->args[i] == -1 && *instr == LABEL_CHAR)
 		{
-			printf("parse str dup[%s]\n", instr);
-			ret->labels[i] = ft_strndup((instr + 1), (ft_strchr(instr, c) - instr - 1));
-			printf("-->%s\n", ret->labels[i]);
-			instr += ft_strlen(ret->labels[i]) + 1;	
-			if (*instr == SEPARATOR_CHAR)
-				(instr)++;
+			ret->labels[i] = get_lbl_name(&instr);//ft_strndup((instr + 1), (ft_strchr(instr, c) - instr - 1));
+			printf("LABEL [%s]\n", ret->labels[i]);
 		}
+		instr += *instr == SEPARATOR_CHAR ? 1 : 0;
 		ret->arg_types[i] = code;
 		ret->coding_byte |=  code << (3 - i) * 2;
-		count_arg--;
-		i++;
 		instr += skip_whitespaces(instr);
-		printf("parse str 3[%s]\n", instr);
 		if (count_arg == 0 && *instr != '\0' &&
 			*instr != COMMENT_CHAR && *instr != ALT_COMMENT_CHAR)
 			error_exit("Too many arguments", 1);

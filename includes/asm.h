@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:34:04 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 00:42:47 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ _Bool			is_unnecessary(char **line, int i);
 // void			save_label(char *name, char *in_code,
 							// int value, t_lbl **labels);
 t_lbl			*save_label(t_lbl **labels, char *name_label, int value);
+char			*get_lbl_name(char **instr);
 void			label_input(t_instruct *inow, t_lbl *lhead);
 // t_lbl			*add_label(t_lbl **labels, char *name_label);
 void			add_label(t_instruct *data, char *label, char type, _Bool small);

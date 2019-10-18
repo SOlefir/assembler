@@ -6,11 +6,32 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:13:07 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:25:36 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 00:43:01 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+char		*get_lbl_name(char **instr)
+{
+	int len_lnl;
+	int i;
+	char *name;
+
+	i = -1;
+	len_lnl = 0;
+	(*instr)++;
+	while (is_lblchar((*instr)[len_lnl]))
+		len_lnl++;
+	name = (char*)ft_memalloc(len_lnl + 1);
+	name[len_lnl] = '\0';
+	while (++i < len_lnl)
+	{
+		name[i] = **instr;
+		(*instr)++;
+	}
+	return (name);
+}
 
 int			label_value(char *label_name, t_lbl *labels)
 {
@@ -33,8 +54,8 @@ void		label_input(t_instruct *inow, t_lbl *lhead)
 		i = -1;
 		while (++i < 3 && inow->label_places[i])
 		{
-			if (!(val = label_value(inow->label_names[i], lhead)))
-				error_exit("Unknown label in arguments", 1);
+			if ((val = label_value(inow->label_names[i], lhead)) != -1)
+				error_exit("Unknown label in arguments", 0);
 			val = val - (inow->pos_now + 1);
 			encode_int(inow->label_places[i], val, inow->label_sizes[i]);
 		}

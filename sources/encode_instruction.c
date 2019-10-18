@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 23:35:22 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:22:33 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 00:06:26 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void			encode(t_instruct *data, int value, char type, _Bool small)
 	char	*now;
 	int		to;
 	int		i;
-	int		code_size;
-	
+
 	i = -1;
 	if (type == REG_CODE)
 		to = 0;
@@ -44,6 +43,11 @@ void			encode(t_instruct *data, int value, char type, _Bool small)
 	while (++i < (to + 1))
 		data->str[(data->size)++] = *now--;
 	return;
+
+	// int		i;
+	int		code_size;
+	// char	*by_byte_iterator;
+
 	if (type == REG_CODE)
 		code_size = 1;
 	if (type == IND_CODE)
@@ -51,6 +55,16 @@ void			encode(t_instruct *data, int value, char type, _Bool small)
 	if (type == DIR_CODE)
 		code_size = (small) ? 2 : 4;
 	data->size += encode_int(data->str, value, code_size);
+	printf("CS(%d)(%d)(", code_size, value);
+	for (int i = 0; i < code_size; i++)
+		printf("%x ", (int)data->str[i]);
+	printf(") ");
+
+	// i = -1;
+	// by_byte_iterator = (char *)(&value);
+	// by_byte_iterator += (code_size - 1);
+	// while (++i < code_size)
+	// 	data->str[data->size++] = *(by_byte_iterator--);
 }
 
 t_instruct	*encode_instruct(t_args *args) 
@@ -63,7 +77,7 @@ t_instruct	*encode_instruct(t_args *args)
 	data = (t_instruct *)ft_memalloc(sizeof(t_instruct)); 
 	data->label_places[0] = NULL;
 	data->str = ft_strnew(now.count_args * sizeof(int) + ((now.octet) ? 2 : 1)); 
-	data->size = (now.octet) ? 2 : 1; 
+	data->size = (now.octet) ? 2 : 1;
 	data->next = NULL;
 	data->prev = data;
 	data->str[0] = args->op_code + 1; 
