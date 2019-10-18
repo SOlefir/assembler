@@ -22,14 +22,14 @@ char			*is_label(char *str)
 {
 	int i;
 
-	i = -1;
-	while (str[++i] != '\0')
-	{
-		while (is_lblchar(str[i]))
-			i++;
-		if (str[i++] == LABEL_CHAR)
-			return (ft_strndup(str, (--i)));
-	}
+	i = 0;
+	// while (str[++i] != '\0')
+	// {
+	while (is_lblchar(str[i]))
+		i++;
+	if (str[i] == LABEL_CHAR)
+		return (ft_strndup(str, i));
+	// }
 	return (NULL);
 }
 

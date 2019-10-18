@@ -26,7 +26,7 @@ int			atoi_for_args(char **str, char end)
 		neg = -1;
 		(*str)++;
 	}
-	while (**str != end || **str != '\0')
+	while (**str != end && **str != '\0')
 	{
 		num *= i;
 		num += **str - '0';

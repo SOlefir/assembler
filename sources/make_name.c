@@ -26,16 +26,19 @@ char	*make_name(char *name_champ)
 		i--;
 	if (name_champ[(i + 1)] != 's')
 		return ("false");
-	name = malloc(sizeof(char) * i + COR_SIZE);
+	// name = malloc(sizeof(char) * i + COR_SIZE);
+	name = malloc(sizeof(char) * i + PROG_NAME_LENGTH);
 	while (c < i)
 	{
 		name[c] = name_champ[c];
 		c++;
 	}
 	i = 0;
-	while (i < COR_SIZE)
+	// while (i < COR_SIZE)
+	while (i < PROG_NAME_LENGTH)
 	{
-		name[c] = COR[i];
+		// name[c] = COR[i];
+		name[c] = 0;
 		c++;
 		i++;
 	}

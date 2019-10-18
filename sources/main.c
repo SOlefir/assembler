@@ -37,9 +37,13 @@ int				main(int ac, char **av)
 	holder = init_holder();
 	get_name_comment(fd_arg, holder->header);
 	get_instruction(fd_arg, holder);
-	//insert_label(&holder);
+	printf("%zu\n", sizeof(t_instruct));
+	// system("leaks asm");
+	label_input(holder->code, holder->labels); 
+	// printf("labels ok\n");
+	write_in_file("test.cor", holder);
 	//close(fd_arg);
 	//write_in_file(make_name(av[1]), holder);
-	//system("leaks asm");
+	// system("leaks asm");
 	return (0);
 }

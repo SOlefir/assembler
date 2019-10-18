@@ -40,7 +40,7 @@ static int	check_arg(int type, char **instr)
 	int	code;
 
 	code = 0;
-	printf("c->> %c\n", **instr);
+	// printf("c->> %c\n", **instr);
 	if ((**instr) == '%' && that_type(T_DIR, type))
 		code = DIR_CODE;
 	else if ((**instr) == 'r' && that_type(T_REG, type))
@@ -54,8 +54,8 @@ static int	check_arg(int type, char **instr)
 	*instr += skip_whitespaces(*instr);
 	if ((**instr) != LABEL_CHAR && !ft_isdigit((int)(**instr)))
 	 	error_exit("Wrong 2args", 0);
-	printf("instr(check)-> [%s]\n", *instr);
-	printf("code: %d\n", code);
+	// printf("instr(check)-> [%s]\n", *instr);
+	// printf("code: %d\n", code);
 	return (code);
 }
 
@@ -65,15 +65,16 @@ static int	get_arg(int *code, char **instr, int *types, char end_arg)
 
 	arg = 0;
 	*code = check_arg(types[0], instr);
-	if (**instr == LABEL_CHAR && ++(*(*instr)) != '\0')
+	if (**instr == LABEL_CHAR)// && *(++(*instr)) != '\0')
 		return (-1);
+	// printf("problem here..\n");
 	arg = atoi_for_args(instr, end_arg); // сдвигает указатель
 	// if ((end_arg == SEPARATOR_CHAR && **instr != end_arg) ||
 	// 	(end_arg == '\0' && **instr != '\0'))
 	// 	error_exit("неправильное кол-во аргументов", 0);
-	printf("%d\n", arg);
-	printf("end_arg: %c\n", end_arg);
-	printf("instr(get)---> [%s]\n", *instr);
+	// printf("%d\n", arg);
+	// printf("end_arg: %c\n", end_arg);
+	// printf("instr(get)---> [%s]\n", *instr);
 	if (**instr == SEPARATOR_CHAR)
 		(*instr)++;
 	return (arg);
@@ -90,22 +91,29 @@ t_args		*parse_code(char *instr, t_op *op)
 	i = 0;
 	c = '\0';
 	code = 0;
-	count_arg = op->arg;
-	ret = init_args(count_arg);
+	printf("opcode: %s, args: %d\n", op->name_op, op->count_args);
+	count_arg = op->count_args;
+	ret = init_args((unsigned char)op->code_op - 1);//count_arg);
 	instr += ft_strlen(op->name_op) + 1 + skip_whitespaces(instr);
 	while (count_arg > 0)
 	{
-		printf("\n");
+		// printf("\n");
 		instr += skip_whitespaces(instr);
 		printf("instr(parse)-> [%s]\n", instr);
 		c = (count_arg == 1) ? '\0' : SEPARATOR_CHAR;
-		printf("count_arg: %d\n", count_arg);
+		// printf("count_arg: %d\n", count_arg);
 		if ((ret->args[i] = get_arg(&code, &instr, &op->arg_types[i], c)) < 0)
-			ret->label = ft_strndup((instr + 1), (ft_strchr(instr, c) - instr - 1));
-		printf("lalbel %s\n", ret->label);
-		printf("arg = %d\n", ret->args[i]);
+		{
+			ret->labels[i] = ft_strndup((instr + 1), (ft_strchr(instr, c) - instr - 1));
+			instr += ft_strlen(ret->labels[i]) + 1;	
+			if (*instr == SEPARATOR_CHAR)
+				(instr)++;
+		}
+		// printf("lalbel %s\n", ret->labels[i]);
+		// printf("arg = %d\n", ret->args[i]);
 		//ret->size_arg += size_code_args(code, op);
-		ret->types |=  code << (2 * count_arg);
+		ret->arg_types[i] = code;
+		ret->coding_byte |=  code << (3 - i) * 2;
 		count_arg--;
 		i++;
 	}

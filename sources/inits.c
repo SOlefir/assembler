@@ -33,24 +33,31 @@ t_header		*init_header(void)
 	return (header);
 }
 
-t_args		*init_args(int count_args)
+t_args		*init_args(unsigned char op_code)//int count_args)
 {
 	t_args	*arg;
+	// int		i;
+
 	arg = (t_args*)ft_memalloc(sizeof(t_args));
-	arg->count_args = count_args;
-	arg->args = (int*)ft_memalloc(sizeof(int) * count_args);
-	arg->label = NULL;
+	arg->op_code = op_code;
+	// i = -1;
+	// while (++i < 3)
+		// arg->arg_types[i] = 0;
+	// arg->coding_byte = 0;
+	// arg->args = (int*)ft_memalloc(sizeof(int) * count_args);
+	// arg->labels = NULL;
 	return (arg);
 }
 
-t_lbl		*init_labels(char *name)
+t_lbl		*init_labels(char *name, int value)
 {
 	t_lbl	*label;
 
 	label = (t_lbl*)ft_memalloc(sizeof(t_lbl));
 	label->name = name;
-	label->in_code = NULL;
-	label->next = NULL;
+	label->value = value;
+	// label->in_code = NULL;
+	// label->next = NULL;
 	return (label);
 }
 

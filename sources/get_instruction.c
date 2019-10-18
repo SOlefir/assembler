@@ -20,7 +20,7 @@ void	get_instruction(int fd_arg, t_holder *holder)
 	int		i;
 
 	line = NULL;
-	holder->bytes_count = -1;
+	holder->bytes_count = 0;
 	while (get_next_line(fd_arg, &line) && (i = skip_whitespaces(line)) >= 0)
 	{
 		label_name = NULL;
@@ -31,11 +31,13 @@ void	get_instruction(int fd_arg, t_holder *holder)
 			continue ;
 		if ((label_name = is_label(&line[i])))
 		{
-			printf("\nИНСТРУКЦИЯ\n");
-			save_label(NULL, label_name, holder->bytes_count + 1,
-															&(holder->labels));
-			holder->labels->value = holder->bytes_count;
-			printf("\nИНСТРУКЦИЯ\n");
+			// printf("\nИНСТРУКЦИЯ\n");
+			printf("LABEL PLACE: %s\n", label_name);
+			save_label(&(holder->labels), label_name, holder->bytes_count + 1);
+			// save_label(NULL, label_name, holder->bytes_count + 1,
+															// &(holder->labels));
+			// holder->labels->value = holder->bytes_count;
+			// printf("\nИНСТРУКЦИЯ\n");
 			i += ft_strlen(label_name) + skip_whitespaces(line);
 		}
 		if ((op = find_op(&line[i])))

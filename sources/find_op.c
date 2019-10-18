@@ -18,8 +18,8 @@ t_op 	*find_op(char *str)
  	int		op_len;
  	int		i;
 
-	i = -1;
-	while (++i < 16)
+	i = 16;
+	while (--i >= 0)
 	{
 		op_len = ft_strlen(g_op_tab[i].name_op);
 		c = str[op_len];

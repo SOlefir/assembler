@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/17 20:36:41 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/16 19:22:30 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,62 +38,59 @@ typedef struct s_holder			t_holder;
 **		STRUCTURES
 */
 
-struct			s_op
+typedef struct			s_op
 {
 	char	*name_op;
-	int		count_args;
+	int		arg;
 	int		arg_types[3];
 	int		code_op;
 	int		cyecles;
 	char	*comment;
 	_Bool	octet;
 	_Bool	lbl_size;
-};
+}						t_op;
 
-struct			s_lbl
+typedef struct			s_lbl
 {
 	char			*name;
 	int				value;
-	//char			**in_code;
+	char			*in_code;
 	t_lbl			*next;
-};
+}						t_lbl;
 
-struct			s_code //возможно стоит заменить на либовские листы 
+typedef struct			s_code //возможно стоит заменить на либовские листы 
 {
 	char	*code;
 	int		size;
 	t_code	*next;
-};
+}						t_code;
 
-typedef struct	s_instruct
+typedef struct			s_holder
 {
-	unsigned short		size;
-	char				*str;
-	size_t				pos_now;
-	unsigned short		label_sizes[3];
-	char				*(label_places[3]);
-	char				*(label_names[3]);
-	// char				**label_names;
-	struct s_instruct	*next;
-	struct s_instruct	*prev;
-}				t_instruct;
-
-struct			s_holder
-{
-	size_t		bytes_count;
+	int			bytes_count;
 	t_lbl		*labels;
 	t_header	*header;
-	t_instruct	*code;
-};
+	t_code		*code;
+}						t_holder;
 
-struct			s_args
+
+typedef struct			s_args
 {
-	unsigned char		op_code;
-	unsigned char		coding_byte;
-	unsigned char		arg_types[3];
-	int					args[3];
-	char				*labels[3];
-};
+	unsigned char	coding_byte;
+	unsigned char	op_code;
+	unsigned char	arg_types[3];
+	int				args[3];
+	char			*labels[3];
+}						t_args;
+
+typedef struct			s_args
+{
+	int		types;
+	int		count_args;
+	int		size_arg;
+	int		*args;
+	char	*label;
+}						t_args;
 
 extern int		g_str_n;
 extern t_op		g_op_tab[17];
@@ -105,8 +102,6 @@ void			get_name_comment(int fd, t_header *header);
 void			get_instruction(int fd_arg, t_holder *holder);
 t_args			*parse_code(char *instr, t_op *op);
 void			save_instruction_code(char *line, t_holder *holder, t_op *op);
-unsigned short	encode_int(char *str, int value, int code_size);
-t_instruct		*encode_instruct(t_args *args);
 void			insert_labels(t_holder **holder);
 void			error_exit(char *massage, int byte);
 
@@ -114,9 +109,8 @@ void			error_exit(char *massage, int byte);
 
 t_holder		*init_holder(void);
 t_header		*init_header(void);
-t_lbl			*init_labels(char *name, int value);
-// t_args			*init_args(void);//int count_args);
-t_args			*init_args(unsigned char op_code);//int count_args)
+t_lbl			*init_labels(char *name);
+t_args			*init_args(int count_args);
 t_code			*init_code(int len_code);
 
 /**  definition  **/
@@ -127,12 +121,9 @@ _Bool			is_unnecessary(char **line, int i);
 
 /**  label  **/
 
-// void			save_label(char *name, char *in_code,
-							// int value, t_lbl **labels);
-t_lbl			*save_label(t_lbl **labels, char *name_label, int value);
-void			label_input(t_instruct *inow, t_lbl *lhead);
-// t_lbl			*add_label(t_lbl **labels, char *name_label);
-void			add_label(t_instruct *data, char *label, char type, _Bool small);
+void			save_label(char *name, char *in_code,
+							int value, t_lbl **labels);
+t_lbl			*add_label(t_lbl **labels, char *name_label);
 t_lbl			*find_label(char *name, t_lbl *labels);
 
 /**  other  **/
@@ -142,10 +133,6 @@ int				skip_whitespaces(char *str);
 t_op 			*find_op(char *str);
 char			*extract_from_quotes(int fd, char quote, char **str);
 char			*make_name(char	*file_name);
-
-char	*make_name(char *name_champ);
-void	write_uints(int fd, unsigned int out, _Bool size);
-void	write_in_file(char *prog_name, t_holder *holder);
 
 
 #endif

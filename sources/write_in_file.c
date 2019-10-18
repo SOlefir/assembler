@@ -33,9 +33,10 @@ void	write_uints(int fd, unsigned int out, _Bool size)
 
 void	write_in_file(char *prog_name, t_holder *holder)
 {
-	int		fd;
+	int			fd;
+	t_instruct	*code_part;
 
-	fd = open(prog_name, O_WRONLY | O_CREAT);
+	fd = open(prog_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	//printf("%d\n", holder->bytes_count);
 	write_uints(fd, holder->header->magic, 0);
 	write(fd, holder->header->prog_name, PROG_NAME_LENGTH);
@@ -43,7 +44,14 @@ void	write_in_file(char *prog_name, t_holder *holder)
 	write_uints(fd, holder->bytes_count, 0);
 	write(fd, holder->header->comment, COMMENT_LENGTH);
 	write(fd, "\0\0\0\0", 4);
-	printf("%s\n", holder->code->code);
+	code_part = holder->code;
+	while (code_part) 
+	{
+		// printf("PRINTING > %d!\n", code_part->size); 
+		write(fd, code_part->str, code_part->size);
+		code_part = code_part->next;
+	}
+	// printf("%s\n", holder->code->code);
 	// printf("HERE\n");
 	// while (holder->code->next != NULL)
 	// {
