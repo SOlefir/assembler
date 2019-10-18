@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:13:07 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 15:12:54 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 17:18:18 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int			label_value(char *label_name, t_lbl *labels)
 	while (labels)
 	{
 		if (!(strcmp(labels->name, label_name)))
-			return labels->value;
+			return (labels->value);
 		labels = labels->next;
 	}
-	return -1;
+	return (-1);
 }
 
 void		label_input(t_instruct *inow, t_lbl *lhead)
@@ -51,7 +51,8 @@ void		label_input(t_instruct *inow, t_lbl *lhead)
 		while (++i < 3 && inow->label_places[i])
 		{
 			printf("LABEL: %s\n", inow->label_names[i]);
-			val = label_value(inow->label_names[i], lhead);
+			if (!(val = label_value(inow->label_names[i], lhead)))
+				error_exit("Unknown label in arguments", 0);
 			printf("Val: %d, Pos_now: %d, LabelPlace: %d\n", 
 				val, (int)inow->pos_now, (int)(inow->label_places[i] - inow->str));
 			val = val - (inow->pos_now + 1);//(inow->label_places[i] - inow->str));
