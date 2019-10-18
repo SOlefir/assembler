@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/09/29 16:56:06 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 21:07:47 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ char				*extract_from_quotes(int fd, char quote, char **str)
 		ft_lstappend(&head, ft_lstnewsimple(*str));
 	}
 	if (!end)
-		error_exit("Quote is not closed!", 0);
+		error_exit("Quote is not closed!", 1);
 	return (collapse_list(&head, end - *str));
 }

@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 17:11:04 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 21:23:39 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,16 @@ static _Bool	empty_nc(char *command)
 
 static void		last_check_nc(char *name, char *comment)
 {
-	// if ((is_(NAME_CMD_STRING, line) && name) ||
-	// 	(is_(COMMENT_CMD_STRING, line) && comment))
-	// 	error_exit("Repeating command or invalid character!", 0);
 	if (name == NULL && comment == NULL)
-		error_exit("No name and comment command or used of unknown command!", 0);
+		error_exit("No name and comment command or used of unknown command!", 1);
 	if (empty_nc(name))
-		error_exit("No name command!", 0);
+		error_exit("No name command!", 1);
 	if (empty_nc(comment))
-		error_exit("No comment command!", 0);
+		error_exit("No comment command!", 1);
 	if (ft_strlen(comment) > COMMENT_LENGTH)
-		error_exit("Player comment is longer than 2048 bytes!", 0);
+		error_exit("Player comment is longer than 2048 bytes!", 1);
 	if (ft_strlen(name) > PROG_NAME_LENGTH)
-		error_exit("Player name is longer than 128 bytes!", 0);
+		error_exit("Player name is longer than 128 bytes!", 1);
 }
 
 
@@ -59,11 +56,11 @@ static char		*get_quote(int fd, char *line, int size_cmd)
 		quot = extract_from_quotes(fd, '"', &temp);
 	}
 	else
-		error_exit("Quotes have error!", 0);//написать что имя заданно не корректно
+		error_exit("Quotes have error!", 1);
 	end_quot = ft_strchr(temp, '"');
 	i = skip_whitespaces(end_quot) + 1;
 	if (end_quot[i] != '\0' && end_quot[i] != COMMENT_CHAR)
-		error_exit("Invalid character after quotes!", 0);
+		error_exit("Invalid character after quotes!", 1);
 	ft_strdel(&temp);
 	return (quot);
 }
@@ -75,7 +72,6 @@ static void		save_in_heder(t_header *header, char *name, char *comment)
 
 	i = -1;
 	j = 0;
-	ft_printf("\nname: %s\ncomment: %s\n", name, comment);
 	while (++i < PROG_NAME_LENGTH + 1)
 		if (name[j] != '\0')
 			header->prog_name[i] = name[j++];
@@ -102,7 +98,6 @@ void			get_name_comment(int fd, t_header *header)
 	line = NULL;
 	comment = NULL;
 	name = NULL;
-	ft_printf("\n_____________\n");
 	while (get_next_line(fd, &line) && (i = skip_whitespaces(line)) >= 0)
 	{
 		g_str_n++;
@@ -117,9 +112,6 @@ void			get_name_comment(int fd, t_header *header)
 		if (name && comment)
 			break ;
 	}
-	//ft_printf("\nname: %s\ncomment: %s\n", name, comment);
-	//printf("%s\n", line);
 	last_check_nc(name, comment);
 	save_in_heder(header, name, comment);
-	ft_printf("\n_____________\n");
 }

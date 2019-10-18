@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:12:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 17:17:35 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 20:22:24 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_op 	*find_op(char *str)
 
 	i = 16;
 	j = 0;
-	while (!ft_iswhitespace(str[j]))
+	while (!ft_iswhitespace(str[j]) && str[j] != '\0')
 		j++;
 	while (--i >= 0)
 	{

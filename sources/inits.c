@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 15:32:08 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 21:24:20 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,12 @@ t_header		*init_header(void)
 	return (header);
 }
 
-t_args		*init_args(unsigned char op_code)//int count_args)
+t_args		*init_args(unsigned char op_code)
 {
 	t_args	*arg;
-	// int		i;
 
 	arg = (t_args*)ft_memalloc(sizeof(t_args));
 	arg->op_code = op_code;
-	// i = -1;
-	// while (++i < 3)
-		// arg->arg_types[i] = 0;
-	// arg->coding_byte = 0;
-	// arg->args = (int*)ft_memalloc(sizeof(int) * count_args);
-	// arg->labels = NULL;
 	return (arg);
 }
 
@@ -56,8 +49,6 @@ t_lbl		*init_labels(char *name, int value)
 	label = (t_lbl*)ft_memalloc(sizeof(t_lbl));
 	label->name = name;
 	label->value = value;
-	// label->in_code = NULL;
-	// label->next = NULL;
 	return (label);
 }
 

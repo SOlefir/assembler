@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 15:24:26 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 21:34:04 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,18 @@ struct			s_op
 	_Bool	lbl_size;
 };
 
+typedef struct	s_code //возможно стоит заменить на либовские листы 
+{
+	char			*code;
+	int				size;
+	struct s_code	*next;
+}				t_code;
+
 struct			s_lbl
 {
 	char			*name;
 	int				value;
-	//char			**in_code;
 	t_lbl			*next;
-};
-
-struct			s_code //возможно стоит заменить на либовские листы 
-{
-	char	*code;
-	int		size;
-	t_code	*next;
 };
 
 typedef struct	s_instruct
@@ -139,7 +138,7 @@ t_lbl			*find_label(char *name, t_lbl *labels);
 
 /**  other  **/
 
-int				atoi_for_args(char **str, char end);
+int				atoi_for_args(char **str);
 int				skip_whitespaces(char *str);
 t_op 			*find_op(char *str);
 char			*extract_from_quotes(int fd, char quote, char **str);

@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 22:18:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 19:41:52 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 21:38:00 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	write_in_file(char *prog_name, t_holder *holder)
 	int			fd;
 	t_instruct	*code_part;
 
+	printf("prog name %s\n", prog_name);
 	fd = open(prog_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-	//printf("%d\n", holder->bytes_count);
 	write_uints(fd, holder->header->magic, 0);
 	write(fd, holder->header->prog_name, PROG_NAME_LENGTH);
 	write(fd, "\0\0\0\0", 4);
@@ -47,21 +47,9 @@ void	write_in_file(char *prog_name, t_holder *holder)
 	code_part = holder->code;
 	while (code_part) 
 	{
-		// printf("PRINTING > %d!\n", code_part->size); 
 		write(fd, code_part->str, code_part->size);
 		code_part = code_part->next;
 	}
-	// printf("%s\n", holder->code->code);
-	// printf("HERE\n");
-	// while (holder->code->next != NULL)
-	// {
-	// 	printf("WHAT\n");
-	// 	write(fd, holder->code->code, holder->code->size);
-	// 	printf("KEK\n");
-	// 	holder->code = holder->code->next;
-	// 	printf("LOL\n");
-	// }
-	// printf("HERE\n");
-	// write(fd, holder->code->code, holder->code->size);
-	// printf("HERE\n");
+	ft_putstr("Writing output program to ");
+ 	ft_putendl(prog_name);
 }
