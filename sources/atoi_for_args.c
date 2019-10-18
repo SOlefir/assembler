@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 21:06:32 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:58:13 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 22:02:12 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			atoi_for_args(char **str)
 	}
 	while (ft_isdigit(**str))
 	{
-		num += (num * 10) + ((**str) - '0');
+		num = (num * 10) + ((**str) - '0');
 		(*str)++;
 	}
 	printf("num %d\n", num);
