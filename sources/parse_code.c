@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 18:30:54 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 18:50:16 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@
 // 	if (code == REG_CODE && *instr == '-')
 // }
 
-static _Bool	that_type(int type, int arg)
+static int	that_type(int type, int arg)
 {
 	int	that;
 
 	that = arg & type;
-	if (that == 0 || that == type)
+	printf("%d & %d\n", arg, type);
+	printf("that = %d\n", that);
+	if (that == type)
 		return (1);
 	return (0);
 }
@@ -46,17 +48,18 @@ static _Bool	that_type(int type, int arg)
 static int	check_arg(int type, char **instr)
 {
 	int	code;
+	int i;
 
 	code = 0;
 	// printf("c->> %c\n", **instr);
 	if ((**instr) == '\0')
 		error_exit("Too few arguments", 0);
-	else if ((**instr) == '%' && that_type(T_DIR, type))
+	else if ((**instr) == '%' && (i = that_type(T_DIR, type)) && printf("tut--->%d\n", i))
 		code = DIR_CODE;
-	else if ((**instr) == 'r' && that_type(T_REG, type))
+	else if ((**instr) == 'r' && (i = that_type(T_REG, type)))
 		code = REG_CODE;
 	else if (((**instr) == LABEL_CHAR || ft_isdigit((int)(**instr)) || 
-		(**instr) == '-') && that_type(T_IND, type))
+		(**instr) == '-') && (i = that_type(T_IND, type)))
 		code = IND_CODE;
 	else
 		error_exit("Invalid argument type or invalid character", 0);
