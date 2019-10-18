@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:45:52 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 21:53:54 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_arg(int type, char **instr)
 
 	code = 0;
 	if ((**instr) == '\0')
-		error_exit("Too few arguments", 0);
+		error_exit("Too few arguments", 1);
 	else if ((**instr) == '%' && (i = that_type(T_DIR, type)))
 		code = DIR_CODE;
 	else if ((**instr) == 'r' && (i = that_type(T_REG, type)))
@@ -59,6 +59,7 @@ static int	get_arg(int *code, char **instr, int *types)
 		error_exit("Register number greater or less than permissible", 1);
 	if (**instr == SEPARATOR_CHAR)
 		(*instr)++;
+	printf("%d\n", arg);
 	return (arg);
 }
 
@@ -80,7 +81,7 @@ t_args		*parse_code(char *instr, t_op *op)
 		c = (count_arg == 1) ? '\0' : SEPARATOR_CHAR;
 		if ((ret->args[i] = get_arg(&code, &instr, &op->arg_types[i])) < 0)
 		{
-			ret->labels[i] = strndup((instr + 1), (ft_strchr(instr, c) - instr - 1));
+			ret->labels[i] = ft_strndup((instr + 1), (ft_strchr(instr, c) - instr - 1));
 			printf("-->%s\n", ret->labels[i]);
 			instr += ft_strlen(ret->labels[i]) + 1;	
 			if (*instr == SEPARATOR_CHAR)
@@ -93,7 +94,7 @@ t_args		*parse_code(char *instr, t_op *op)
 		instr += skip_whitespaces(instr);
 		if (count_arg == 0 && *instr != '\0' &&
 			*instr != COMMENT_CHAR && *instr != ALT_COMMENT_CHAR)
-			error_exit("Too many arguments", 0);
+			error_exit("Too many arguments", 1);
 	}
 	return (ret);
 }
