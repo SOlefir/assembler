@@ -52,7 +52,9 @@ void		label_input(t_instruct *inow, t_lbl *lhead)
 		{
 			printf("LABEL: %s\n", inow->label_names[i]);
 			val = label_value(inow->label_names[i], lhead);
-			val = val - (inow->pos_now + (inow->label_places[i] - inow->str));
+			printf("Val: %d, Pos_now: %d, LabelPlace: %d\n", 
+				val, (int)inow->pos_now, (int)(inow->label_places[i] - inow->str));
+			val = val - (inow->pos_now + 1);//(inow->label_places[i] - inow->str));
 			printf("Value: %d\n", val);
 			encode_int(inow->label_places[i], val, inow->label_sizes[i]);
 		}
