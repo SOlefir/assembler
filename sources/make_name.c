@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 13:01:13 by mtrotsen          #+#    #+#             */
-/*   Updated: 2019/10/18 15:29:07 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 18:34:36 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*make_name(char *name_champ)
 
 	i = ft_strlen(name_champ) - 2;
 	c = 0;
-	name = malloc(sizeof(char) * i + COR_SIZE);
+	name = (char*)ft_memalloc(sizeof(char) * i + COR_SIZE);
 	while (c < i)
 	{
 		name[c] = name_champ[c];

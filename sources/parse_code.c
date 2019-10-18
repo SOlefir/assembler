@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 18:18:57 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 18:30:54 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,9 @@ t_args		*parse_code(char *instr, t_op *op)
 		ret->coding_byte |=  code << (3 - i) * 2;
 		count_arg--;
 		i++;
-		instr += skip_whitespaces(instr)
-		if (count_arg == 0 && *instr != '\0')
+		instr += skip_whitespaces(instr);
+		if (count_arg == 0 && *instr != '\0' &&
+			*instr != COMMENT_CHAR && *instr != ALT_COMMENT_CHAR)
 			error_exit("Too many arguments", 0);
 	}
 	return (ret);
