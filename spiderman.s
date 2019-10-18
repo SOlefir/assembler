@@ -19,6 +19,7 @@ loop_live:
 	    zjmp %:to_jump
 to_jump2:
 	    fork %:end
+
 say_live:
 	    live %1
 	    zjmp %:say_live

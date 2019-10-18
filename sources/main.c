@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 15:26:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 22:20:23 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 15:23:47 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ int				main(int ac, char **av)
 	get_name_comment(fd_arg, holder->header);
 	get_instruction(fd_arg, holder);
 	printf("%zu\n", sizeof(t_instruct));
-	// system("leaks asm");
 	label_input(holder->code, holder->labels); 
-	// printf("labels ok\n");
-	write_in_file("test.cor", holder);
+	// write_in_file("test.cor", holder);
 	//close(fd_arg);
-	//write_in_file(make_name(av[1]), holder);
+	write_in_file(make_name(av[1]), holder);
 	// system("leaks asm");
 	return (0);
 }

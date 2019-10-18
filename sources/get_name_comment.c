@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 19:48:57 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 15:31:15 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		last_check_nc(char *name, char *comment)
 	// 	(is_(COMMENT_CMD_STRING, line) && comment))
 	// 	error_exit("Repeating command or invalid character!", 0);
 	if (name == NULL && comment == NULL)
-		error_exit("No name and comment command or used of unknown command!", 0);	
+		error_exit("No name and comment command or used of unknown command!", 0);
 	if (empty_nc(name))
 		error_exit("No name command!", 0);
 	if (empty_nc(comment))
@@ -121,4 +121,5 @@ void			get_name_comment(int fd, t_header *header)
 	//printf("%s\n", line);
 	last_check_nc(name, comment);
 	save_in_heder(header, name, comment);
+	ft_printf("\n_____________\n");
 }

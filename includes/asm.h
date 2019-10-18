@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/17 20:36:41 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 15:24:26 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include "../libft/libft.h"
 #include <fcntl.h>
 #include "stdio.h"//
+
+# define COR ".cor"
+# define COR_SIZE 4
 
 /*
 **		TYPEDEF
@@ -73,7 +76,6 @@ typedef struct	s_instruct
 	unsigned short		label_sizes[3];
 	char				*(label_places[3]);
 	char				*(label_names[3]);
-	// char				**label_names;
 	struct s_instruct	*next;
 	struct s_instruct	*prev;
 }				t_instruct;

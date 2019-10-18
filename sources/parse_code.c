@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/16 20:49:58 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/18 16:31:11 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 // 	if (type == T_IND)
 // 		return (IND_SIZE);
 // 	return (0);
+// }
+
+// static void		last_check_args(char *instr, int type)
+// {
+// 	if (code == REG_CODE && *instr == '-')
 // }
 
 static _Bool	that_type(int type, int arg)
@@ -49,11 +54,12 @@ static int	check_arg(int type, char **instr)
 			that_type(T_IND, type))
 		code = IND_CODE;
 	else
-		error_exit("Wrong 1args", 0);
+		error_exit("Invalid argument type or invalid character", 0);
 	(*instr)++;
-	*instr += skip_whitespaces(*instr);
+	// *instr += skip_whitespaces(*instr);
+	//last_check_args(*instr, code);
 	if ((**instr) != LABEL_CHAR && !ft_isdigit((int)(**instr)))
-	 	error_exit("Wrong 2args", 0);
+	 	error_exit("Incorrect parameters passed", 0);
 	// printf("instr(check)-> [%s]\n", *instr);
 	// printf("code: %d\n", code);
 	return (code);
@@ -67,8 +73,10 @@ static int	get_arg(int *code, char **instr, int *types, char end_arg)
 	*code = check_arg(types[0], instr);
 	if (**instr == LABEL_CHAR)// && *(++(*instr)) != '\0')
 		return (-1);
-	// printf("problem here..\n");
 	arg = atoi_for_args(instr, end_arg); // сдвигает указатель
+	if (*code == REG_CODE && (arg < 0 || arg > REG_NUMBER))
+		error_exit("Register number greater or less than permissible", 0);
+
 	// if ((end_arg == SEPARATOR_CHAR && **instr != end_arg) ||
 	// 	(end_arg == '\0' && **instr != '\0'))
 	// 	error_exit("неправильное кол-во аргументов", 0);
