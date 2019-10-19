@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 22:18:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:25:35 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 17:10:49 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	write_in_file(char *prog_name, t_holder *holder)
 	write(fd, holder->header->comment, COMMENT_LENGTH);
 	write(fd, "\0\0\0\0", 4);
 	code_part = holder->code;
-	while (code_part) 
+	while (code_part)
 	{
 		write(fd, code_part->str, code_part->size);
 		code_part = code_part->next;
 	}
 	ft_putstr("Writing output program to ");
- 	ft_putendl(prog_name);
+	ft_putendl(prog_name);
 }

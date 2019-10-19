@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:13:07 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:35:02 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:58:19 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char		*get_lbl_name(char **instr)
 {
-	int len_lnl;
-	int i;
-	char *name;
+	int		len_lnl;
+	int		i;
+	char	*name;
 
 	i = -1;
 	len_lnl = 0;
@@ -82,7 +82,7 @@ void		add_label(t_instruct *data, char *label, char type, _Bool small)
 		data->label_places[i + 1] = NULL;
 }
 
-t_lbl	*save_label(t_lbl **labels, char *name_label, int value)
+t_lbl		*save_label(t_lbl **labels, char *name_label, int value)
 {
 	t_lbl	*temp;
 

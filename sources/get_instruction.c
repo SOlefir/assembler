@@ -6,11 +6,17 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:34:27 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:52:43 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+void	check_line(t_op *op, char *label_name)
+{
+	if (!op && !label_name)
+		error_exit("Unknown command!", 1);
+}
 
 void	check_eof(int fd)
 {
@@ -44,11 +50,9 @@ void	get_instruction(int fd, t_holder *holder)
 			i += ft_strlen(label_name) + 1;
 			i += skip_whitespaces(&line[i]);
 		}
-		// printf("LINE [%s]\n", &line[i]);
 		if ((op = find_op(&line[i])))
 			save_instruction_code(&line[i], holder, op);
-		if (!op && !label_name)
-			error_exit("Unknown command!", 1);
+		check_line(op, label_name);
 		ft_strdel(&line);
 	}
 	check_eof(fd);

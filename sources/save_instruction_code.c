@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:18:01 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:33:32 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 17:09:53 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void		save_instruction_code(char *line, t_holder *holder, t_op *op)
 	encoded = encode_instruct(arguments);
 	if (holder->code == NULL)
 		holder->code = encoded;
-	else 
+	else
 	{
 		holder->code->prev->next = encoded;
 		encoded->prev = holder->code->prev;
 		holder->code->prev = encoded;
 	}
-	encoded->pos_now = holder->bytes_count; 
+	encoded->pos_now = holder->bytes_count;
 	holder->bytes_count += encoded->size;
 	free_args(&arguments);
 }

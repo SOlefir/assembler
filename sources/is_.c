@@ -6,13 +6,13 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 00:41:24 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:55:58 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-_Bool	is_lblchar(char c)
+_Bool			is_lblchar(char c)
 {
 	return (((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')
 		|| c == '_') ? 1 : 0);

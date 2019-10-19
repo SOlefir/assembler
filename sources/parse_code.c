@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:25:20 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 17:09:16 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,20 @@ static int	get_arg(int *code, char **instr, int *types)
 		return (-1);
 	*instr += skip_whitespaces(*instr);
 	if ((**instr) != '-' && !ft_isdigit((int)(**instr)))
-	 	error_exit("Incorrect parameters passed", 1);
+		error_exit("Incorrect parameters passed", 1);
 	arg = atoi_for_args(instr);
 	if (*code == REG_CODE && (arg < 0 || arg > (1 + REG_NUMBER)))
 		error_exit("Register number greater or less than permissible", 1);
 	if (**instr == SEPARATOR_CHAR)
 		(*instr)++;
 	return (arg);
+}
+
+static void	check_count_arg(char *instr, int count_arg)
+{
+	if (count_arg == 0 && *instr != '\0' &&
+		*instr != COMMENT_CHAR && *instr != ALT_COMMENT_CHAR)
+		error_exit("Too many arguments", 1);
 }
 
 t_args		*parse_code(char *instr, t_op *op)
@@ -71,24 +78,18 @@ t_args		*parse_code(char *instr, t_op *op)
 	ret = init_args((unsigned char)op->code_op - 1);
 	instr += ft_strlen(op->name_op);
 	instr += skip_whitespaces(instr);
-	while (--count_arg > 0)
+	while (--count_arg > 0 && (++i) >= 0)
 	{
-		i++;
 		ret->args[i] = get_arg(&code, &instr, &op->arg_types[i]);
-		if (ret->args[i] == -1)
+		if (ret->args[i] == -1 && *instr == LABEL_CHAR)
 		{
-		 	if (*instr == LABEL_CHAR)
-		 	{
-				ret->labels[i] = get_lbl_name(&instr);
-				instr += (*instr == SEPARATOR_CHAR) ? 1 : 0;
-			}
+			ret->labels[i] = get_lbl_name(&instr);
+			instr += (*instr == SEPARATOR_CHAR) ? 1 : 0;
 		}
 		instr += skip_whitespaces(instr);
 		ret->arg_types[i] = code;
-		ret->coding_byte |=  code << (3 - i) * 2;
-		if (count_arg == 0 && *instr != '\0' &&
-			*instr != COMMENT_CHAR && *instr != ALT_COMMENT_CHAR)
-			error_exit("Too many arguments", 1);
+		ret->coding_byte |= code << (3 - i) * 2;
+		check_count_arg(instr, count_arg);
 	}
 	return (ret);
 }

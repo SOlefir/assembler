@@ -6,17 +6,17 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:12:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 20:22:24 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:48:01 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-t_op 	*find_op(char *str)
+t_op	*find_op(char *str)
 {
- 	char	c;
- 	int		j;
- 	int		i;
+	char	c;
+	int		j;
+	int		i;
 
 	i = 16;
 	j = 0;

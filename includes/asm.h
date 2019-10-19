@@ -6,21 +6,20 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:32:45 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:55:37 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
-# define ASM_H 
+# define ASM_H
 
-#include "op.h"
-#include "../libft/libft.h"
-#include <fcntl.h>
+# include "op.h"
+# include "../libft/libft.h"
+# include <fcntl.h>
 
 /*
 **		DEFINE
 */
-
 
 # define COR ".cor"
 # define COR_SIZE 4
@@ -31,7 +30,7 @@
 
 typedef struct s_op				t_op;
 typedef struct s_args			t_args;
-typedef struct s_code			t_code;
+// typedef struct s_code			t_code;
 typedef struct s_lbl			t_lbl;
 typedef struct s_holder			t_holder;
 typedef struct s_instruct		t_instruct;
@@ -52,12 +51,12 @@ struct			s_op
 	_Bool	lbl_size;
 };
 
-struct			s_code
-{
-	char			*code;
-	int				size;
-	t_code			*next;
-};
+// struct			s_code
+// {
+// 	char			*code;
+// 	int				size;
+// 	t_code			*next;
+// };
 
 struct			s_lbl
 {
@@ -95,7 +94,6 @@ struct			s_args
 	char				*labels[3];
 };
 
-
 /*
 ** 		GLOBAL VAR
 */
@@ -103,8 +101,9 @@ struct			s_args
 extern int		g_str_n;
 extern t_op		g_op_tab[17];
 
-
-/** main  **/
+/*
+** 		GLOBAL VAR
+*/
 
 void			get_name_comment(int fd, t_header *header);
 void			get_instruction(int fd, t_holder *holder);
@@ -115,40 +114,51 @@ t_instruct		*encode_instruct(t_args *args);
 void			insert_labels(t_holder **holder);
 void			error_exit(char *massage, int byte);
 
-/**  inits  **/
+/*
+**	main
+*/
 
 t_holder		*init_holder(void);
 t_header		*init_header(void);
 t_lbl			*init_labels(char *name, int value);
 t_args			*init_args(unsigned char op_code);
-t_code			*init_code(int len_code);
+// t_code			*init_code(int len_code);
 
-/**  definition  **/
+/*
+**	is-file
+*/
 
 _Bool			is_lblchar(char c);
 char			*is_label(char *str);
 _Bool			is_(char *cmd, char *str);
 _Bool			is_unnecessary(char **line, int i);
 
-/**  label  **/
+/*
+**	labels
+*/
 
 char			*get_lbl_name(char **instr);
 t_lbl			*save_label(t_lbl **labels, char *name_label, int value);
 void			label_input(t_instruct *inow, t_lbl *lhead);
-void			add_label(t_instruct *data, char *label, char type, _Bool small);
+void			add_label(t_instruct *data, char *label, char type,
+																_Bool small);
 t_lbl			*find_label(char *name, t_lbl *labels);
 
-/**  other  **/
+/*
+**	other
+*/
 
 int				atoi_for_args(char **str);
 int				skip_whitespaces(char *str);
-t_op 			*find_op(char *str);
+t_op			*find_op(char *str);
 char			*extract_from_quotes(int fd, char quote, char **str);
-char			*make_name(char	*file_name);
 
-char	*make_name(char *name_champ);
-void	write_uints(int fd, unsigned int out, _Bool size);
-void	write_in_file(char *prog_name, t_holder *holder);
+/*
+**	write
+*/
 
+char			*make_name(char *name_champ);
+void			write_uints(int fd, unsigned int out, _Bool size);
+void			write_in_file(char *prog_name, t_holder *holder);
 
 #endif

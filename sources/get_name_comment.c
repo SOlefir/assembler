@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:33:59 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:56:58 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void		last_check_nc(char *name, char *comment)
 {
 	if (name == NULL && comment == NULL)
-		error_exit("No name and comment command or used of unknown command!", 1);
+		error_exit("No name and comment command or used of unknown command!",
+																			1);
 	if (!name)
 		error_exit("No name command!", 1);
 	if (!comment)
@@ -25,7 +26,6 @@ static void		last_check_nc(char *name, char *comment)
 	if (ft_strlen(name) > PROG_NAME_LENGTH)
 		error_exit("Player name is longer than 128 bytes!", 1);
 }
-
 
 static char		*get_quote(int fd, char *line, int size_cmd)
 {

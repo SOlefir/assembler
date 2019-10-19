@@ -6,22 +6,22 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:16:53 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:55:42 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-t_code			*init_code(int len_code)
-{
-	t_code	*code;
+// t_code			*init_code(int len_code)
+// {
+// 	t_code	*code;
 
-	code = (t_code*)ft_memalloc(sizeof(t_code));
-	code->size = len_code;
-	code = NULL;
-	code->next = NULL;
-	return (code);
-}
+// 	code = (t_code*)ft_memalloc(sizeof(t_code));
+// 	code->size = len_code;
+// 	code = NULL;
+// 	code->next = NULL;
+// 	return (code);
+// }
 
 t_header		*init_header(void)
 {
@@ -33,7 +33,7 @@ t_header		*init_header(void)
 	return (header);
 }
 
-t_args		*init_args(unsigned char op_code)
+t_args			*init_args(unsigned char op_code)
 {
 	t_args	*arg;
 
@@ -42,7 +42,7 @@ t_args		*init_args(unsigned char op_code)
 	return (arg);
 }
 
-t_lbl		*init_labels(char *name, int value)
+t_lbl			*init_labels(char *name, int value)
 {
 	t_lbl	*label;
 

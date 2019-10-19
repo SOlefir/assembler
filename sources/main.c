@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/10 15:26:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:33:15 by solefir          ###   ########.fr       */
+/*   Created: 2019/10/19 17:00:46 by solefir           #+#    #+#             */
+/*   Updated: 2019/10/19 17:11:51 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static _Bool	s_file(char *arg)
 	while (arg[i] != '\0')
 		i++;
 	if (arg[i - 2] == '.' && arg[i - 1] == 's')
-			return (1);
+		return (1);
 	return (0);
 }
 
@@ -40,9 +40,7 @@ int				main(int ac, char **av)
 	holder = init_holder();
 	get_name_comment(fd_arg, holder->header);
 	get_instruction(fd_arg, holder);
-	t_lbl		*lbl;
-	lbl = holder->labels;
-	label_input(holder->code, holder->labels); 
+	label_input(holder->code, holder->labels);
 	write_in_file(make_name(av[1]), holder);
 	// system("leaks asm");
 	return (0);
