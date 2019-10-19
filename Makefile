@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/18 14:57:44 by solefir           #+#    #+#              #
-#    Updated: 2019/10/18 23:36:10 by solefir          ###   ########.fr        #
+#    Updated: 2019/10/19 22:37:29 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,9 @@ SOURCES	:=	$(addprefix $(DIR), $(SOURCES))
 
 OBJ		:=	$(SOURCES:%.c=%.o)
 
-CFLAGS	:=	#$(addprefix -W, all extra error) \
+CFLAGS	:=	$(addprefix -W, all extra error) \
 			$(addprefix -I, $(HEADER))\
-			-fsanitize="address" -g -fno-omit-frame-pointer
+			#-fsanitize="address" -g -fno-omit-frame-pointer
 
 all: $(NAME)
 

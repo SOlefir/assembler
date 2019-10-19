@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 21:08:08 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 22:17:53 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ static int	that_type(int type, int arg)
 
 static int	check_arg(int type, char **instr)
 {
+	int	i;
+
+	i = skip_whitespaces(*instr);
+	*instr += i;
 	if ((**instr) == '\0')
 		error_exit("Too few arguments", 1);
-	else if ((**instr) == '%' && that_type(T_DIR, type))
+	*instr -= i;
+	if ((**instr) == '%' && that_type(T_DIR, type))
 		return (DIR_CODE);
 	else if ((**instr) == 'r' && that_type(T_REG, type))
 		return (REG_CODE);
@@ -69,7 +74,7 @@ static void	validation_args(char **instr, int count_arg, _Bool first)
 {
 	int	i;
 
-	printf("---->>%s\n", *instr);
+	printf("|---->>%s |%d |%d\n", *instr, count_arg, first);
 	if (first)
 	{
 		if (**instr == SEPARATOR_CHAR)
@@ -77,14 +82,18 @@ static void	validation_args(char **instr, int count_arg, _Bool first)
 	}
 	else
 	{
+		printf("(%c)\n", **instr);
 		i = skip_whitespaces(*instr);
 		*instr += i;
 		if (count_arg <= 1 && (**instr) != '\0' &&
 		(**instr) != COMMENT_CHAR && (**instr) != ALT_COMMENT_CHAR)
 			error_exit("Too many arguments for this operation or excess char", 1);
+		if (**instr == '\0' && count_arg > 1)
+			error_exit("Too few arguments", 1);
 		*instr -= i;
-		if ((count_arg > 1 && **instr != SEPARATOR_CHAR) ||
-			(count_arg == 1 && **instr == SEPARATOR_CHAR))
+		printf("(%c)\n", **instr);
+		if ((count_arg > 1 && (**instr) != SEPARATOR_CHAR) ||
+			(count_arg == 1 && (**instr) == SEPARATOR_CHAR))
 			error_exit("Inappropriate use the separator character", 1);
 	}
 	*instr += (**instr == SEPARATOR_CHAR) ? 1 : 0;
