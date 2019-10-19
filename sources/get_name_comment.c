@@ -6,21 +6,32 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:56:58 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 19:28:40 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+static _Bool	empty_nc(char *command)
+{
+	int	i;
+	if (command == NULL)
+		return (1);
+	i = skip_whitespaces(command);
+	if (command == NULL || command[i] == '\0')
+		return (1);
+	return (0);
+}
 
 static void		last_check_nc(char *name, char *comment)
 {
 	if (name == NULL && comment == NULL)
 		error_exit("No name and comment command or used of unknown command!",
 																			1);
-	if (!name)
-		error_exit("No name command!", 1);
-	if (!comment)
-		error_exit("No comment command!", 1);
+	if (empty_nc(name))
+		error_exit("Player name is not filled!", 1);
+	if (empty_nc(comment))
+		error_exit("Player comment is not filled!", 1);
 	if (ft_strlen(comment) > COMMENT_LENGTH)
 		error_exit("Player comment is longer than 2048 bytes!", 1);
 	if (ft_strlen(name) > PROG_NAME_LENGTH)

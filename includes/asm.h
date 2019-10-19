@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 17:16:26 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 19:38:45 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ unsigned short	encode_int(char *str, int value, int code_size);
 t_instruct		*encode_instruct(t_args *args);
 void			insert_labels(t_holder **holder);
 void			error_exit(char *massage, int byte);
-
+void			errors_in_args(char *instr);
 /*
 **	main
 */

@@ -6,14 +6,25 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:52:43 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 20:32:58 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
 
-void	check_line(t_op *op, char *label_name)
+void	check_line(t_op *op, char *label_name, char *line)
 {
+	char	*second_lbl;
+
+	second_lbl = is_label(line);
+	if (is_(NAME_CMD_STRING, line))
+		error_exit("Repeat name command!", 1);
+	if (is_(COMMENT_CMD_STRING, line))
+		error_exit("Repeat comment command!", 1);
+	if (label_name && second_lbl)
+		error_exit("Label in one line with second label", 1);
+	if (label_name && *line == SEPARATOR_CHAR)
+		error_exit("The separator character must be only between arguments", 1);
 	if (!op && !label_name)
 		error_exit("Unknown command!", 1);
 }
@@ -52,7 +63,7 @@ void	get_instruction(int fd, t_holder *holder)
 		}
 		if ((op = find_op(&line[i])))
 			save_instruction_code(&line[i], holder, op);
-		check_line(op, label_name);
+		check_line(op, label_name, &line[i]);
 		ft_strdel(&line);
 	}
 	check_eof(fd);
