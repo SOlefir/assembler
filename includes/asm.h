@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:16:21 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:28:49 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 #include <fcntl.h>
 #include "stdio.h"//
 
+/*
+**		DEFINE
+*/
+
+
 # define COR ".cor"
 # define COR_SIZE 4
 
@@ -25,17 +30,11 @@
 **		TYPEDEF
 */
 
-
 typedef struct s_op				t_op;
 typedef struct s_args			t_args;
 typedef struct s_code			t_code;
 typedef struct s_lbl			t_lbl;
 typedef struct s_holder			t_holder;
-
-/*
-** GLOBAL VAR THAT USED IN FUNCT EXIT_ERRORS 
-*/
-
 
 /*
 **		STRUCTURES
@@ -53,7 +52,7 @@ struct			s_op
 	_Bool	lbl_size;
 };
 
-typedef struct	s_code //возможно стоит заменить на либовские листы 
+typedef struct	s_code
 {
 	char			*code;
 	int				size;
@@ -96,11 +95,16 @@ struct			s_args
 	char				*labels[3];
 };
 
+
+/*
+** 		GLOBAL VAR
+*/
+
 extern int		g_str_n;
 extern t_op		g_op_tab[17];
 
 
-/**  main  **/
+/** main  **/
 
 void			get_name_comment(int fd, t_header *header);
 void			get_instruction(int fd, t_holder *holder);
@@ -116,8 +120,7 @@ void			error_exit(char *massage, int byte);
 t_holder		*init_holder(void);
 t_header		*init_header(void);
 t_lbl			*init_labels(char *name, int value);
-// t_args			*init_args(void);//int count_args);
-t_args			*init_args(unsigned char op_code);//int count_args)
+t_args			*init_args(unsigned char op_code);
 t_code			*init_code(int len_code);
 
 /**  definition  **/
@@ -129,12 +132,9 @@ _Bool			is_unnecessary(char **line, int i);
 
 /**  label  **/
 
-// void			save_label(char *name, char *in_code,
-							// int value, t_lbl **labels);
 char			*get_lbl_name(char **instr);
 t_lbl			*save_label(t_lbl **labels, char *name_label, int value);
 void			label_input(t_instruct *inow, t_lbl *lhead);
-// t_lbl			*add_label(t_lbl **labels, char *name_label);
 void			add_label(t_instruct *data, char *label, char type, _Bool small);
 t_lbl			*find_label(char *name, t_lbl *labels);
 
