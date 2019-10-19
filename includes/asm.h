@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 01:50:15 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:16:21 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ extern t_op		g_op_tab[17];
 /**  main  **/
 
 void			get_name_comment(int fd, t_header *header);
-void			get_instruction(int fd_arg, t_holder *holder);
+void			get_instruction(int fd, t_holder *holder);
 t_args			*parse_code(char *instr, t_op *op);
 void			save_instruction_code(char *line, t_holder *holder, t_op *op);
 unsigned short	encode_int(char *str, int value, int code_size);

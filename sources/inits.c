@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:24:20 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:16:53 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ t_holder		*init_holder(void)
 	holder->header = init_header();
 	holder->labels = NULL;
 	holder->code = NULL;
+	holder->bytes_count = 0;
 	return (holder);
 }
