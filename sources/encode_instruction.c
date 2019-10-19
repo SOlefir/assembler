@@ -27,22 +27,22 @@ unsigned short	encode_int(char *str, int value, int code_size)
 
 void			encode(t_instruct *data, int value, char type, _Bool small)
 {
-	char	*now;
-	int		to;
-	int		i;
+	// char	*now;
+	// int		to;
+	// int		i;
 
-	i = -1;
-	if (type == REG_CODE)
-		to = 0;
-	if (type == IND_CODE)
-		to = 1;
-	if (type == DIR_CODE)
-		to = (small) ? 1 : 3;
-	now = (char *)(&value);
-	now += to;
-	while (++i < (to + 1))
-		data->str[(data->size)++] = *now--;
-	return;
+	// i = -1;
+	// if (type == REG_CODE)
+	// 	to = 0;
+	// if (type == IND_CODE)
+	// 	to = 1;
+	// if (type == DIR_CODE)
+	// 	to = (small) ? 1 : 3;
+	// now = (char *)(&value);
+	// now += to;
+	// while (++i < (to + 1))
+	// 	data->str[(data->size)++] = *now--;
+	// return;
 
 	// int		i;
 	int		code_size;
@@ -54,7 +54,7 @@ void			encode(t_instruct *data, int value, char type, _Bool small)
 		code_size = 2;
 	if (type == DIR_CODE)
 		code_size = (small) ? 2 : 4;
-	data->size += encode_int(data->str, value, code_size);
+	data->size += encode_int(data->str + data->size, value, code_size);
 	printf("CS(%d)(%d)(", code_size, value);
 	for (int i = 0; i < code_size; i++)
 		printf("%x ", (int)data->str[i]);
@@ -86,9 +86,15 @@ t_instruct	*encode_instruct(t_args *args)
 	while (++i < now.count_args) 
 	{
 		if (args->labels[i]) 
+		{
 			add_label(data, args->labels[i], args->arg_types[i], now.lbl_size); 
+			printf("lavel %s\n", args->labels[i]);
+		}
 		else
+		{
+			printf("arg %s:%d, type %d\n", now.name_op, args->args[i], args->arg_types[i]);
 			encode(data, args->args[i], args->arg_types[i], now.lbl_size); 
+		}
 	}
 	return data; 
 } 

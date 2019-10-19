@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 22:18:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 00:13:00 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 02:43:29 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	write_in_file(char *prog_name, t_holder *holder)
 	t_instruct	*code_part;
 
 	fd = open(prog_name, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	printf("NAME {%s}\n", holder->header->prog_name);
+	printf("COMMENT {%s}\n", holder->header->comment);
 	write_uints(fd, holder->header->magic, 0);
 	write(fd, holder->header->prog_name, PROG_NAME_LENGTH);
 	write(fd, "\0\0\0\0", 4);

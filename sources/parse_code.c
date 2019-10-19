@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 01:43:16 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 03:09:31 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ static int	get_arg(int *code, char **instr, int *types)
 
 	arg = 0;
 	*code = check_arg(types[0], instr);
+	// printf("not lbc: %c\n", **instr);
 	if (**instr == LABEL_CHAR)
+	{
 		return (-1);
+	}
 	arg = atoi_for_args(instr); 
 	if (*code == REG_CODE && (arg < 0 || arg > (1 + REG_NUMBER)))
 		error_exit("Register number greater or less than permissible", 1);
@@ -76,15 +79,20 @@ t_args		*parse_code(char *instr, t_op *op)
 	ret = init_args((unsigned char)op->code_op - 1);
 	instr += ft_strlen(op->name_op);
 	instr += skip_whitespaces(instr);
-	while (--count_arg > 0 && (i++))
+	while (--count_arg > 0)
 	{
+		i++;
 		ret->args[i] = get_arg(&code, &instr, &op->arg_types[i]);
-		if (ret->args[i] == -1 && *instr == LABEL_CHAR)
+		if (ret->args[i] == -1)
 		{
-			ret->labels[i] = get_lbl_name(&instr);
-			printf("LABEL [%s]\n", ret->labels[i]);
+			// printf("NOT LBC: %c\n", *instr);
+		 	if (*instr == LABEL_CHAR)
+		 	{
+				ret->labels[i] = get_lbl_name(&instr);
+				// printf("LABEL [%s]\n", ret->labels[i]);
+			}
 		}
-		instr += *instr == SEPARATOR_CHAR ? 1 : 0;
+		instr += (*instr == SEPARATOR_CHAR) ? 1 : 0;
 		ret->arg_types[i] = code;
 		ret->coding_byte |=  code << (3 - i) * 2;
 		instr += skip_whitespaces(instr);
@@ -92,5 +100,6 @@ t_args		*parse_code(char *instr, t_op *op)
 			*instr != COMMENT_CHAR && *instr != ALT_COMMENT_CHAR)
 			error_exit("Too many arguments", 1);
 	}
+	printf("ret ok!\n");
 	return (ret);
 }

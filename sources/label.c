@@ -54,7 +54,9 @@ void		label_input(t_instruct *inow, t_lbl *lhead)
 		i = -1;
 		while (++i < 3 && inow->label_places[i])
 		{
-			if ((val = label_value(inow->label_names[i], lhead)) != -1)
+			printf("Searching for: %s\n", inow->label_names[i]);
+			val = label_value(inow->label_names[i], lhead);
+			if (val == -1)
 				error_exit("Unknown label in arguments", 0);
 			val = val - (inow->pos_now + 1);
 			encode_int(inow->label_places[i], val, inow->label_sizes[i]);

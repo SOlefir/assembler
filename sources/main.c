@@ -40,6 +40,13 @@ int				main(int ac, char **av)
 	holder = init_holder();
 	get_name_comment(fd_arg, holder->header);
 	get_instruction(fd_arg, holder);
+	t_lbl		*lbl;
+	lbl = holder->labels;
+	while (lbl)
+	{
+		printf("lbl: %s -> %d\n", lbl->name, lbl->value);
+		lbl = lbl->next;
+	}
 	label_input(holder->code, holder->labels); 
 	write_in_file(make_name(av[1]), holder);
 	// system("leaks asm");

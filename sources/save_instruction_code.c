@@ -27,6 +27,7 @@ void		save_instruction_code(char *line, t_holder *holder, t_op *op)
 
 	arguments = parse_code(line, op);
 	encoded = encode_instruct(arguments);
+	printf("encode ok!\n");
 	if (holder->code == NULL)
 		holder->code = encoded;
 	else 
