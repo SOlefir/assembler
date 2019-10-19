@@ -6,11 +6,12 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 17:09:16 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 17:48:25 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+#include <stdio.h> //
 
 static int	that_type(int type, int arg)
 {
@@ -44,13 +45,19 @@ static int	get_arg(int *code, char **instr, int *types)
 
 	arg = 0;
 	*code = check_arg(types[0], instr);
-	(*instr) += (**instr == LABEL_CHAR) ? 0 : 1;
+	if (*code == IND_CODE)
+		printf("%d str%d %s\n", *code, g_str_n, *instr);
+	(*instr) += *code == IND_CODE ? 0 : 1;//(**instr == LABEL_CHAR || **instr == '-') ? 0 : 1;
 	if (**instr == LABEL_CHAR)
 		return (-1);
 	*instr += skip_whitespaces(*instr);
 	if ((**instr) != '-' && !ft_isdigit((int)(**instr)))
 		error_exit("Incorrect parameters passed", 1);
+	if (*code == IND_CODE)
+		printf("===%s\n", *instr);
 	arg = atoi_for_args(instr);
+	if (*code == IND_CODE)
+		printf("arg %d\n", arg);
 	if (*code == REG_CODE && (arg < 0 || arg > (1 + REG_NUMBER)))
 		error_exit("Register number greater or less than permissible", 1);
 	if (**instr == SEPARATOR_CHAR)
