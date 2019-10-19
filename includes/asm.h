@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:55:37 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 17:16:26 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 
 typedef struct s_op				t_op;
 typedef struct s_args			t_args;
-// typedef struct s_code			t_code;
 typedef struct s_lbl			t_lbl;
 typedef struct s_holder			t_holder;
 typedef struct s_instruct		t_instruct;
@@ -50,13 +49,6 @@ struct			s_op
 	_Bool	octet;
 	_Bool	lbl_size;
 };
-
-// struct			s_code
-// {
-// 	char			*code;
-// 	int				size;
-// 	t_code			*next;
-// };
 
 struct			s_lbl
 {
@@ -122,7 +114,6 @@ t_holder		*init_holder(void);
 t_header		*init_header(void);
 t_lbl			*init_labels(char *name, int value);
 t_args			*init_args(unsigned char op_code);
-// t_code			*init_code(int len_code);
 
 /*
 **	is-file

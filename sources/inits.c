@@ -6,22 +6,11 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:55:42 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 17:16:02 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
-
-// t_code			*init_code(int len_code)
-// {
-// 	t_code	*code;
-
-// 	code = (t_code*)ft_memalloc(sizeof(t_code));
-// 	code->size = len_code;
-// 	code = NULL;
-// 	code->next = NULL;
-// 	return (code);
-// }
 
 t_header		*init_header(void)
 {
