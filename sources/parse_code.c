@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 03:09:31 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 03:17:51 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	that_type(int type, int arg)
 	int	that;
 
 	that = arg & type;
+	printf("%d %d\n", that, type);
 	if (that == type)
 		return (1);
 	return (0);
@@ -28,18 +29,22 @@ static int	check_arg(int type, char **instr)
 	int i;
 
 	code = 0;
+	printf("{%s}\n", *instr);
+	printf("%c\n", LABEL_CHAR);
+	printf("%c\n", **instr);
 	if ((**instr) == '\0')
 		error_exit("Too few arguments", 1);
-	else if ((**instr) == '%' && (i = that_type(T_DIR, type)))
+	else if ((**instr) == '%' && that_type(T_DIR, type))
 		code = DIR_CODE;
-	else if ((**instr) == 'r' && (i = that_type(T_REG, type)))
+	else if ((**instr) == 'r' && that_type(T_REG, type))
 		code = REG_CODE;
-	else if (((**instr) == LABEL_CHAR || ft_isdigit((int)(**instr)) || 
-		(**instr) == '-') && (i = that_type(T_IND, type)))
+	else if (that_type(T_IND, type) && (**instr == LABEL_CHAR ||
+		ft_isdigit((int)**instr) || **instr == '-')) ///почему-то тут не заходит в тело ифа
 		code = IND_CODE;
 	else
 		error_exit("Invalid argument type or invalid character", 1);
 	(*instr)++;
+	instr += skip_whitespaces(*instr);
 	if ((**instr) != '-' && (**instr) != LABEL_CHAR &&
 		!ft_isdigit((int)(**instr)))
 	 	error_exit("Incorrect parameters passed", 1);
@@ -89,6 +94,7 @@ t_args		*parse_code(char *instr, t_op *op)
 		 	if (*instr == LABEL_CHAR)
 		 	{
 				ret->labels[i] = get_lbl_name(&instr);
+				instr += skip_whitespaces(instr);
 				// printf("LABEL [%s]\n", ret->labels[i]);
 			}
 		}
