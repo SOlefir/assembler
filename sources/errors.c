@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 20:00:32 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 19:38:38 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 22:48:02 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	errors_in_args(char *instr)
 		ft_isdigit((int)*instr) || *instr == '-')
 		error_exit("Invalid argument type", 1);
 	else
-	 	error_exit("Incorrect character in arguments", 1);
+		error_exit("Incorrect character in arguments", 1);
 }
 
 void	error_exit(char *message, int str)
