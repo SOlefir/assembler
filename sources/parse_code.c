@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 22:44:32 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 23:18:27 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	validation_args(char **instr, int count_arg, _Bool first)
 	if (first && **instr == SEPARATOR_CHAR)
 		error_exit("The separator character must be only between arguments",
 																			1);
-	else
+	else if (!first)
 	{
 		i = skip_whitespaces(*instr);
 		*instr += i;

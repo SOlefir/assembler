@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 22:48:20 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 23:29:42 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void			get_name_comment(int fd, t_header *header)
 			comment = get_quote(fd, line, ft_strlen(COMMENT_CMD_STRING) + i);
 		else if (!name || !comment)
 			break ;
+		ft_strdel(&line);
 		if (name && comment)
 			break ;
 	}

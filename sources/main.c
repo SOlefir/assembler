@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 17:00:46 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 17:11:51 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 23:31:05 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,5 @@ int				main(int ac, char **av)
 	get_instruction(fd_arg, holder);
 	label_input(holder->code, holder->labels);
 	write_in_file(make_name(av[1]), holder);
-	// system("leaks asm");
 	return (0);
 }

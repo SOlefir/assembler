@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 22:18:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 17:10:49 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 23:24:45 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void	write_in_file(char *prog_name, t_holder *holder)
 	}
 	ft_putstr("Writing output program to ");
 	ft_putendl(prog_name);
+	ft_strdel(&prog_name);
 }
