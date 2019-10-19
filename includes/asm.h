@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:28:49 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:32:45 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "op.h"
 #include "../libft/libft.h"
 #include <fcntl.h>
-#include "stdio.h"//
 
 /*
 **		DEFINE
@@ -35,6 +34,7 @@ typedef struct s_args			t_args;
 typedef struct s_code			t_code;
 typedef struct s_lbl			t_lbl;
 typedef struct s_holder			t_holder;
+typedef struct s_instruct		t_instruct;
 
 /*
 **		STRUCTURES
@@ -52,12 +52,12 @@ struct			s_op
 	_Bool	lbl_size;
 };
 
-typedef struct	s_code
+struct			s_code
 {
 	char			*code;
 	int				size;
-	struct s_code	*next;
-}				t_code;
+	t_code			*next;
+};
 
 struct			s_lbl
 {
@@ -66,7 +66,7 @@ struct			s_lbl
 	t_lbl			*next;
 };
 
-typedef struct	s_instruct
+struct			s_instruct
 {
 	unsigned short		size;
 	char				*str;
@@ -74,9 +74,9 @@ typedef struct	s_instruct
 	unsigned short		label_sizes[3];
 	char				*(label_places[3]);
 	char				*(label_names[3]);
-	struct s_instruct	*next;
-	struct s_instruct	*prev;
-}				t_instruct;
+	t_instruct			*next;
+	t_instruct			*prev;
+};
 
 struct			s_holder
 {

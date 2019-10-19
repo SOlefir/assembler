@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:13:07 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 01:47:25 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:35:02 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void		label_input(t_instruct *inow, t_lbl *lhead)
 		i = -1;
 		while (++i < 3 && inow->label_places[i])
 		{
-			printf("Searching for: %s\n", inow->label_names[i]);
 			val = label_value(inow->label_names[i], lhead);
 			if (val == -1)
 				error_exit("Unknown label in arguments", 0);

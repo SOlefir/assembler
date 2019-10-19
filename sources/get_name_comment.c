@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:24:06 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:33:59 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static char		*get_quote(int fd, char *line, int size_cmd)
 		error_exit("Quotes have error!", 1);
 	end_quot = ft_strchr(temp, '"') + 1;
 	i = skip_whitespaces(end_quot);
-	printf("[%s]\n", &end_quot[i]);
 	if (end_quot[i] != '\0' && end_quot[i] != COMMENT_CHAR
 		&& end_quot[i] != ALT_COMMENT_CHAR)
 		error_exit("Invalid character after quotes!", 1);

@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:21:33 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:34:27 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	get_instruction(int fd, t_holder *holder)
 			continue ;
 		if ((label_name = is_label(&line[i])))
 		{
-			printf("LABEL PLACE: %s\n", label_name);
 			save_label(&(holder->labels), label_name, holder->bytes_count + 1);
 			i += ft_strlen(label_name) + 1;
 			i += skip_whitespaces(&line[i]);

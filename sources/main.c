@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 15:26:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:36:00 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:33:15 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ int				main(int ac, char **av)
 	get_instruction(fd_arg, holder);
 	t_lbl		*lbl;
 	lbl = holder->labels;
-	while (lbl)
-	{
-		printf("lbl: %s -> %d\n", lbl->name, lbl->value);
-		lbl = lbl->next;
-	}
 	label_input(holder->code, holder->labels); 
 	write_in_file(make_name(av[1]), holder);
 	// system("leaks asm");

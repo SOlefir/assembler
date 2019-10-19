@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:18:01 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/18 21:26:53 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:33:32 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		save_instruction_code(char *line, t_holder *holder, t_op *op)
 
 	arguments = parse_code(line, op);
 	encoded = encode_instruct(arguments);
-	printf("encode ok!\n");
 	if (holder->code == NULL)
 		holder->code = encoded;
 	else 

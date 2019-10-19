@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 13:01:13 by mtrotsen          #+#    #+#             */
-/*   Updated: 2019/10/18 21:42:06 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 16:34:36 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*make_name(char *name_champ)
 	int		c;
 	int		m;
 
-	printf("%s\n", name_champ);
 	i = ft_strlen(name_champ) - 2;
 	m = i;
 	while (name_champ[m - 1] && name_champ[(m - 1)] != '/')
@@ -40,6 +39,5 @@ char	*make_name(char *name_champ)
 		c++;
 		i++;
 	}
-	printf("%s\n", name);
 	return (name);
 }
