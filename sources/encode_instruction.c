@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 23:35:22 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 00:06:26 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/19 14:05:09 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void			encode(t_instruct *data, int value, char type, _Bool small)
 	if (type == DIR_CODE)
 		code_size = (small) ? 2 : 4;
 	data->size += encode_int(data->str + data->size, value, code_size);
-	printf("CS(%d)(%d)(", code_size, value);
-	for (int i = 0; i < code_size; i++)
-		printf("%x ", (int)data->str[i]);
-	printf(") ");
+	// printf("CS(%d)(%d)(", code_size, value);
+	// for (int i = 0; i < code_size; i++)
+	// 	printf("%x ", (int)data->str[i]);
+	// printf(") ");
 
 	// i = -1;
 	// by_byte_iterator = (char *)(&value);
@@ -88,11 +88,11 @@ t_instruct	*encode_instruct(t_args *args)
 		if (args->labels[i]) 
 		{
 			add_label(data, args->labels[i], args->arg_types[i], now.lbl_size); 
-			printf("lavel %s\n", args->labels[i]);
+			// printf("lavel %s\n", args->labels[i]);
 		}
 		else
 		{
-			printf("arg %s:%d, type %d\n", now.name_op, args->args[i], args->arg_types[i]);
+			// printf("arg %s:%d, type %d\n", now.name_op, args->args[i], args->arg_types[i]);
 			encode(data, args->args[i], args->arg_types[i], now.lbl_size); 
 		}
 	}
