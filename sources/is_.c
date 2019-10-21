@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 18:28:48 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:55:58 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/20 21:55:53 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ char			*is_label(char *str)
 	return (NULL);
 }
 
-_Bool			is_unnecessary(char **line, int i)
+int				is_unnecessary(char **line, int i)
 {
-	if ((*line)[i] == '\0' || (*line)[i] == COMMENT_CHAR ||
+	if ((*line)[i] == '\0' ||
+		(*line)[i] == COMMENT_CHAR ||
 		(*line)[i] == ALT_COMMENT_CHAR)
 	{
 		ft_strdel(line);

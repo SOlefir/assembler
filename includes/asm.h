@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:53:09 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 19:38:45 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/20 17:31:21 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ extern int		g_str_n;
 extern t_op		g_op_tab[17];
 
 /*
-** 		GLOBAL VAR
+** 	main
 */
 
 void			get_name_comment(int fd, t_header *header);
@@ -106,10 +106,12 @@ t_instruct		*encode_instruct(t_args *args);
 void			insert_labels(t_holder **holder);
 void			error_exit(char *massage, int byte);
 void			errors_in_args(char *instr);
+
 /*
-**	main
+**	inits
 */
 
+void			init_null(char **line, char **comment, char **name, int *end);
 t_holder		*init_holder(void);
 t_header		*init_header(void);
 t_lbl			*init_labels(char *name, int value);
@@ -122,7 +124,7 @@ t_args			*init_args(unsigned char op_code);
 _Bool			is_lblchar(char c);
 char			*is_label(char *str);
 _Bool			is_(char *cmd, char *str);
-_Bool			is_unnecessary(char **line, int i);
+int				is_unnecessary(char **line, int i);
 
 /*
 **	labels
@@ -136,6 +138,14 @@ void			add_label(t_instruct *data, char *label, char type,
 t_lbl			*find_label(char *name, t_lbl *labels);
 
 /*
+**	write
+*/
+
+char			*make_name(char *name_champ);
+void			write_uints(int fd, unsigned int out, _Bool size);
+void			write_in_file(char *prog_name, t_holder *holder);
+
+/*
 **	other
 */
 
@@ -143,13 +153,5 @@ int				atoi_for_args(char **str);
 int				skip_whitespaces(char *str);
 t_op			*find_op(char *str);
 char			*extract_from_quotes(int fd, char quote, char **str);
-
-/*
-**	write
-*/
-
-char			*make_name(char *name_champ);
-void			write_uints(int fd, unsigned int out, _Bool size);
-void			write_in_file(char *prog_name, t_holder *holder);
 
 #endif

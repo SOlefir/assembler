@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 20:12:08 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:48:01 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/20 18:30:27 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ t_op	*find_op(char *str)
 
 	i = 16;
 	j = 0;
-	while (!ft_iswhitespace(str[j]) && str[j] != '\0')
+	while (!ft_iswhitespace(str[j]) && str[j] != '\0' &&
+			str[j] != SEPARATOR_CHAR)
 		j++;
+	if (str[j] == SEPARATOR_CHAR)
+		error_exit("The separator character must be only between arguments",
+																			1);
 	while (--i >= 0)
 	{
 		c = str[j];

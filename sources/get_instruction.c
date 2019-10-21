@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 22:24:44 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 20:32:58 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/20 18:34:00 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	check_line(t_op *op, char *label_name, char *line)
 	char	*second_lbl;
 
 	second_lbl = is_label(line);
+	if (label_name && !op && *line != '\0')
+		error_exit("Incorrect character or command after label!", 1);
 	if (is_(NAME_CMD_STRING, line))
 		error_exit("Repeat name command!", 1);
 	if (is_(COMMENT_CMD_STRING, line))
@@ -29,11 +31,13 @@ void	check_line(t_op *op, char *label_name, char *line)
 		error_exit("Unknown command!", 1);
 }
 
-void	check_eof(int fd)
+void	check_eof(int fd, t_instruct *code)
 {
 	char	buff[1];
 
 	buff[0] = '\0';
+	if (code == NULL)
+		error_exit("No executable code in file", 0);
 	lseek(fd, (long long)-1, 2);
 	read(fd, buff, 1);
 	if (buff[0] != '\n')
@@ -53,7 +57,7 @@ void	get_instruction(int fd, t_holder *holder)
 		label_name = NULL;
 		op = NULL;
 		g_str_n++;
-		if (is_unnecessary(&line, i))
+		if (is_unnecessary(&line, i) > 0)
 			continue ;
 		if ((label_name = is_label(&line[i])))
 		{
@@ -66,5 +70,5 @@ void	get_instruction(int fd, t_holder *holder)
 		check_line(op, label_name, &line[i]);
 		ft_strdel(&line);
 	}
-	check_eof(fd);
+	check_eof(fd, holder->code);
 }

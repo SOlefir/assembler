@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:40:11 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 23:29:42 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/20 22:16:37 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ static _Bool	empty_nc(char *command)
 	return (0);
 }
 
-static void		last_check_nc(char *name, char *comment)
+static void		last_check_nc(char *name, char *comment, int end)
 {
-	if (name == NULL && comment == NULL)
-		error_exit("No name and comment command or used of unknown command!",
-																			1);
+	if (end)
+		error_exit("Empty file", 0);
 	if (empty_nc(name))
-		error_exit("Player name is not filled!", 1);
+		ft_putendl("WARRNING: player name is not filled!");
 	if (empty_nc(comment))
-		error_exit("Player comment is not filled!", 1);
+		ft_putendl("WARRNING: comment is not filled!");
 	if (ft_strlen(comment) > COMMENT_LENGTH)
 		error_exit("Player comment is longer than 2048 bytes!", 1);
 	if (ft_strlen(name) > PROG_NAME_LENGTH)
@@ -56,7 +55,8 @@ static char		*get_quote(int fd, char *line, int size_cmd)
 		quot = extract_from_quotes(fd, '"', &temp);
 	}
 	else
-		error_exit("Quotes have error!", 1);
+		error_exit("After name or comment commands there should be quotes!",
+																			1);
 	end_quot = ft_strchr(temp, '"') + 1;
 	i = skip_whitespaces(end_quot);
 	if (end_quot[i] != '\0' && end_quot[i] != COMMENT_CHAR
@@ -92,28 +92,27 @@ static void		save_in_heder(t_header *header, char *name, char *comment)
 void			get_name_comment(int fd, t_header *header)
 {
 	int		i;
+	int		end;
 	char	*line;
 	char	*name;
 	char	*comment;
 
-	line = NULL;
-	comment = NULL;
-	name = NULL;
-	while (get_next_line(fd, &line) && (i = skip_whitespaces(line)) >= 0)
+	init_null(&line, &comment, &name, &end);
+	while ((get_next_line(fd, &line)) > 0 && (i = skip_whitespaces(line)) >= 0)
 	{
 		g_str_n++;
-		if (is_unnecessary(&line, i))
+		if ((end = is_unnecessary(&line, i)) > 0)
 			continue ;
 		if (is_(NAME_CMD_STRING, &line[i]) && !name)
 			name = get_quote(fd, line, ft_strlen(NAME_CMD_STRING) + i);
 		else if (is_(COMMENT_CMD_STRING, &line[i]) && !comment)
 			comment = get_quote(fd, line, ft_strlen(COMMENT_CMD_STRING) + i);
 		else if (!name || !comment)
-			break ;
+			error_exit("First two commands must be name and comment!", 1);
 		ft_strdel(&line);
 		if (name && comment)
 			break ;
 	}
-	last_check_nc(name, comment);
+	last_check_nc(name, comment, end);
 	save_in_heder(header, name, comment);
 }

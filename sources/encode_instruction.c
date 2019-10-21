@@ -6,11 +6,12 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 23:35:22 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 16:47:05 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/21 14:42:02 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+#include <stdio.h>
 
 unsigned short	encode_int(char *str, int value, int code_size)
 {

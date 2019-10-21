@@ -6,11 +6,19 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 17:00:13 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 17:16:02 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/20 16:59:05 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/asm.h"
+
+void			init_null(char **line, char **comment, char **name, int *end)
+{
+	*end = 0;
+	*line = NULL;
+	*comment = NULL;
+	*name = NULL;
+}
 
 t_header		*init_header(void)
 {

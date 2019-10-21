@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/18 14:57:44 by solefir           #+#    #+#              #
-#    Updated: 2019/10/19 22:37:29 by solefir          ###   ########.fr        #
+#    Updated: 2019/10/21 21:59:07 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SOURCES	:=	main.c \
 			encode_instruction.c\
 			make_name.c\
 			write_in_file.c\
+
+GREEN = \033[0;32m
 
 SOURCES	:=	$(addprefix $(DIR), $(SOURCES))
 

@@ -6,7 +6,7 @@
 /*   By: solefir <solefir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:46:02 by solefir           #+#    #+#             */
-/*   Updated: 2019/10/19 23:18:27 by solefir          ###   ########.fr       */
+/*   Updated: 2019/10/20 18:11:14 by solefir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,14 @@ t_args		*parse_code(char *instr, t_op *op)
 	code = 0;
 	count_arg = op->count_args + 1;
 	ret = init_args((unsigned char)op->code_op - 1);
-	instr += ft_strlen(op->name_op);
+	instr += ft_strlen(op->name_op) + 1;
 	validation_args(&instr, count_arg, 1);
 	while (--count_arg > 0 && (++i) >= 0)
 	{
 		ret->args[i] = get_arg(&code, &instr, &op->arg_types[i]);
 		if (ret->args[i] == -1 && *instr == LABEL_CHAR)
 			ret->labels[i] = get_lbl_name(&instr);
+		instr += skip_whitespaces(instr);
 		validation_args(&instr, count_arg, 0);
 		ret->arg_types[i] = code;
 		ret->coding_byte |= code << (3 - i) * 2;

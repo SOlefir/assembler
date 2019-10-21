@@ -6,7 +6,7 @@
 #    By: solefir <solefir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 21:25:16 by dquitzon          #+#    #+#              #
-#    Updated: 2019/10/18 19:20:22 by solefir          ###   ########.fr        #
+#    Updated: 2019/10/20 17:37:55 by solefir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,20 +44,20 @@ SOURCES = ./ft_bzero.c ./ft_memdel.c ./ft_strclr.c\
     ./nbr.c\
 
 OBJ = $(SOURCES:%.c=%.o)
-FLAGS = -Wall -Wextra -Werror #-fsanitize="address" -g -fno-omit-frame-pointer
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g -fno-omit-frame-pointer
 HEADER = ./libft.h
 
 all: $(NAME)
 
 $(NAME):
-	gcc -c $(FLAGS) $(SOURCES) -I$(HEADER)
-	ar rc $(NAME) $(OBJ) 
-	ranlib $(NAME)
+	@gcc -c $(FLAGS) $(SOURCES) -I$(HEADER)
+	@ar rc $(NAME) $(OBJ) 
+	@ranlib $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
